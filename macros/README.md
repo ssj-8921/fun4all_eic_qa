@@ -26,4 +26,32 @@ By default all detectors and evaluators are enabled as is the dumping of the out
 ```
   Enable::ABSORBER = true;
 ```
- The QA is configures in the macro G4_QA.C where the 
+
+The QA is configured in the macro G4_QA.C it is activated by setting in the Fun4All_G4_EICDetector.C:
+```
+  Enable::QA = true;
+```
+
+The outputs are 
+
+  * G4EICDetector_DSTReader.root : DST Reader output (all Hits and Towers)
+
+  * G4EICDetector_g4cemc_eval.root : Central Barrel EMC evaluation
+
+  * G4EICDetector_g4eemc_eval.root : Forward Electron going EMC evaluation
+
+  * G4EICDetector_g4femc_eval.root : Forward hadron going EMC evaluation
+
+  * G4EICDetector_g4fhcal_eval.root : Forward hadron going HCal evaluation
+
+  * G4EICDetector_g4fwdjet_eval.root : Forward jet evaluation
+
+  * G4EICDetector_g4hcalin_eval.root : Central Barrel Inner Hcal evaluation
+
+  * G4EICDetector_g4hcalout_eval.root : Central Barrel Outer Hcal evaluation
+
+  * G4EICDetector_g4jet_eval.root : Central Barrel jet evaluation
+
+  * G4EICDetector_g4tracking_eval.root : Tracking evaluation
+
+  * G4EICDetector_qa.root : QA histograms
