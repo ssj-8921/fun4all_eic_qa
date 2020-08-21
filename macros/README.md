@@ -32,7 +32,7 @@ The QA is configured in the macro G4_QA.C it is activated by setting in the Fun4
   Enable::QA = true;
 ```
 
-The outputs are 
+The outputs are
 
   * G4EICDetector_DSTReader.root : DST Reader output (all Hits and Towers)
 
@@ -54,4 +54,4 @@ The outputs are
 
   * G4EICDetector_g4tracking_eval.root : Tracking evaluation
 
-  * G4EICDetector_qa.root : QA histograms
+  * G4EICDetector_qa.root : QA histograms (from the modules in G4_QA.C)
