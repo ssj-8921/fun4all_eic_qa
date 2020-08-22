@@ -1,10 +1,10 @@
-# macros
+# fun4all_eic_qa/macros
 
 First you need to source the eic setup script to get your environment and set up your local installation (if you have one). If you use csh/tcsh as your shell, use the .csh scripts, if you have bash use the .sh scripts:
 
 * csh/tcsh:
 ```
-  source /cvmfs/eix.opensciencegrid.org/x8664_sl7/opt/fun4all/core/bin/eic_setup.csh
+  source /cvmfs/eic.opensciencegrid.org/x8664_sl7/opt/fun4all/core/bin/eic_setup.csh
   source $OPT_FUN4ALL/bin/setup_local.csh <install area>
 ```
 
@@ -12,7 +12,7 @@ First you need to source the eic setup script to get your environment and set up
 * bash:
 
 ```
-  source /cvmfs/eix.opensciencegrid.org/x8664_sl7/opt/fun4all/core/bin/eic_setup.sh
+  source /cvmfs/eic.opensciencegrid.org/x8664_sl7/opt/fun4all/core/bin/eic_setup.sh
   source $OPT_FUN4ALL/bin/setup_local.sh <install area>
 ```
 
