@@ -16,7 +16,12 @@ First you need to source the eic setup script to get your environment and set up
   source $OPT_FUN4ALL/bin/setup_local.sh <install area>
 ```
 
-Run the macro:
+In rcf accounts typically are set up by their experiment (STAR, PHENIX) and their definitions of e.g. ROOTSYS interferes with ours. Adding a -n flag to the script will reset existing environment variables which interfere with our settings. Also use this if you want to reset your environment. Using -n does not have negative effects if it is not needed - it just resets your environment to the default:
+```
+  source /cvmfs/eic.opensciencegrid.org/x8664_sl7/opt/fun4all/core/bin/eic_setup.csh -n
+```
+
+## Run the macro:
 ```
   root.exe
   .x Fun4All_G4_EICDetector.C(<number of events>)
