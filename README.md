@@ -32,3 +32,7 @@ git push origin master
 ```
 
 This also allows us to give you support. In case things don't work we can just clone your repo and run it to see what's wrong.
+
+```
+git fetch upstream
+```
