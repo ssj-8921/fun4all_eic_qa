@@ -18,11 +18,13 @@ libeicqa_modules_la_LIBADD = \
 
 pkginclude_HEADERS = \
   QAExample.h \
-  QAG4SimulationEicCalorimeter.h
+  QAG4SimulationEicCalorimeter.h \
+  QAG4SimulationEicCalorimeterSum.h
 
 libeicqa_modules_la_SOURCES = \
   QAExample.cc \
-  QAG4SimulationEicCalorimeter.cc
+  QAG4SimulationEicCalorimeter.cc \
+  QAG4SimulationEicCalorimeterSum.cc
 
 ################################################
 # linking tests
