@@ -39,7 +39,7 @@ The QA is configured in the macro G4_QA.C it is activated by setting in the Fun4
 
 The outputs are
 
-  * G4EICDetector_DSTReader.root : DST Reader output (all Hits and Towers)
+  * G4EICDetector_DSTReader.root : DST Reader output (all Hits and Towers), this file gets very large quickly. Comment out the  Enable::DSTREADER = true; to disable it
 
   * G4EICDetector_g4cemc_eval.root : Central Barrel EMC evaluation
 
