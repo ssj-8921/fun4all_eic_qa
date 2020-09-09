@@ -63,7 +63,7 @@ If you want to save the updated version back to github, use
 git push origin master
 ```
 
-For your own code development use a branch. You can use as many branches as you want if you work on multiple issues. Create a "work" branch and move to it:
+For your own code development use a branch, leave the master branch untouched so you can easily sync with the upstream repo. You can use as many branches as you want if you work on multiple issues. Create a "work" branch and move to it:
 
 ```
 git checkout -b work
