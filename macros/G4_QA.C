@@ -12,6 +12,7 @@
 
 #include <eicqa_modules/QAExample.h>
 #include <eicqa_modules/QAG4SimulationEicCalorimeter.h>
+#include <eicqa_modules/QAG4SimulationEicCalorimeterSum.h>
 
 R__LOAD_LIBRARY(libeicqa_modules.so)
 
@@ -46,6 +47,15 @@ void QAInit()
   if (Enable::EEMC)
   {
     se->registerSubsystem(new QAG4SimulationEicCalorimeter("EEMC", QAG4SimulationEicCalorimeter::kProcessG4Hit));
+  }
+  if (Enable::CEMC && Enable::HCALIN && Enable::HCALOUT)
+  {
+// The QA modules also deals with tracking which we do not apply right now
+// so we need to call the module with kProcessCluster
+      QAG4SimulationEicCalorimeterSum *calo_qa =
+	new QAG4SimulationEicCalorimeterSum(QAG4SimulationEicCalorimeterSum::kProcessCluster);
+      //    calo_qa->Verbosity(10);
+      se->registerSubsystem(calo_qa);
   }
   QAExample *qa = new QAExample();
   //qa->Verbosity(2);
