@@ -29,7 +29,7 @@ class QAG4SimulationEicCalorimeterSum : public SubsysReco
 
   QAG4SimulationEicCalorimeterSum(enu_flags flags = kDefaultFlag);
 
-  virtual ~QAG4SimulationEicCalorimeterSum(){}
+  virtual ~QAG4SimulationEicCalorimeterSum() {}
 
   int Init(PHCompositeNode *topNode);
   int InitRun(PHCompositeNode *topNode);
@@ -108,6 +108,8 @@ class QAG4SimulationEicCalorimeterSum : public SubsysReco
   float get_mag_field() const { return _magField; }
   void set_mag_field(float magField) { _magField = magField; }
 
+  void set_track_nodename(const std::string &name) { m_TrackNodeName = name; }
+
  private:
   //  int
   //  Init_Tower(PHCompositeNode *topNode);
@@ -127,6 +129,7 @@ class QAG4SimulationEicCalorimeterSum : public SubsysReco
 
   uint32_t _flags;
 
+  std::string m_TrackNodeName;
   std::string _calo_name_cemc;
   std::string _calo_name_hcalin;
   std::string _calo_name_hcalout;
