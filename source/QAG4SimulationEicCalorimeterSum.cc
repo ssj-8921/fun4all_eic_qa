@@ -16,11 +16,10 @@
 
 #include <trackbase_historic/SvtxTrack.h>
 
-#include <g4eval/SvtxTrackEval.h>            // for SvtxTrackEval
+#include <g4eval/SvtxTrackEval.h>  // for SvtxTrackEval
 
-
-#include <fun4all/Fun4AllReturnCodes.h>
 #include <fun4all/Fun4AllHistoManager.h>
+#include <fun4all/Fun4AllReturnCodes.h>
 #include <fun4all/SubsysReco.h>
 
 #include <phool/getClass.h>
@@ -34,8 +33,8 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <iterator>                          // for reverse_iterator
-#include <utility>                           // for pair
+#include <iterator>  // for reverse_iterator
+#include <utility>   // for pair
 #include <vector>
 
 using namespace std;
@@ -44,6 +43,7 @@ QAG4SimulationEicCalorimeterSum::QAG4SimulationEicCalorimeterSum(
     QAG4SimulationEicCalorimeterSum::enu_flags flags)
   : SubsysReco("QAG4SimulationEicCalorimeterSum")
   , _flags(flags)
+  , m_TrackNodeName("TrackMap")
   , _calo_name_cemc("CEMC")
   , _calo_name_hcalin("HCALIN")
   , _calo_name_hcalout("HCALOUT")
@@ -68,22 +68,19 @@ int QAG4SimulationEicCalorimeterSum::InitRun(PHCompositeNode *topNode)
   {
     if (!_caloevalstack_cemc)
     {
-      _caloevalstack_cemc.reset(
-          new CaloEvalStack(topNode, _calo_name_cemc));
+      _caloevalstack_cemc.reset(new CaloEvalStack(topNode, _calo_name_cemc));
       _caloevalstack_cemc->set_strict(true);
       _caloevalstack_cemc->set_verbosity(Verbosity() + 1);
     }
     if (!_caloevalstack_hcalin)
     {
-      _caloevalstack_hcalin.reset(
-          new CaloEvalStack(topNode, _calo_name_hcalin));
+      _caloevalstack_hcalin.reset(new CaloEvalStack(topNode, _calo_name_hcalin));
       _caloevalstack_hcalin->set_strict(true);
       _caloevalstack_hcalin->set_verbosity(Verbosity() + 1);
     }
     if (!_caloevalstack_hcalout)
     {
-      _caloevalstack_hcalout.reset(
-          new CaloEvalStack(topNode, _calo_name_hcalout));
+      _caloevalstack_hcalout.reset(new CaloEvalStack(topNode, _calo_name_hcalout));
       _caloevalstack_hcalout->set_strict(true);
       _caloevalstack_hcalout->set_verbosity(Verbosity() + 1);
     }
@@ -94,6 +91,7 @@ int QAG4SimulationEicCalorimeterSum::InitRun(PHCompositeNode *topNode)
     if (!_svtxevalstack)
     {
       _svtxevalstack.reset(new SvtxEvalStack(topNode));
+      _svtxevalstack->set_track_nodename(m_TrackNodeName);
       _svtxevalstack->set_strict(true);
       _svtxevalstack->set_verbosity(Verbosity() + 1);
     }
@@ -298,7 +296,7 @@ int QAG4SimulationEicCalorimeterSum::process_event_TrackProj(PHCompositeNode *to
 }
 
 bool QAG4SimulationEicCalorimeterSum::eval_trk_proj(const string &detector, SvtxTrack *track,
-                                                 PHCompositeNode *topNode)
+                                                    PHCompositeNode *topNode)
 // Track projections
 {
   assert(track);
@@ -343,9 +341,9 @@ bool QAG4SimulationEicCalorimeterSum::eval_trk_proj(const string &detector, Svtx
   std::vector<double> point;
   point.assign(3, NAN);
 
-//  const double radius = towergeo->get_radius() + towergeo->get_thickness() * 0.5;
+  //  const double radius = towergeo->get_radius() + towergeo->get_thickness() * 0.5;
 
-//  PHG4HoughTransform::projectToRadius(track, _magField, radius, point);
+  //  PHG4HoughTransform::projectToRadius(track, _magField, radius, point);
 
   if (std::isnan(point[0]) or std::isnan(point[1]) or std::isnan(point[2]))
   {

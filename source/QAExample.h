@@ -29,11 +29,9 @@ class QAExample : public SubsysReco
   // common prefix for QA histograms
   std::string get_histo_prefix();
 
-
  private:
   /// load nodes
   int load_nodes(PHCompositeNode *);
-
 
   PHG4TruthInfoContainer *m_truthContainer = nullptr;
 };

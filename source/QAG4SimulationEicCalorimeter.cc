@@ -21,9 +21,9 @@
 #include <fun4all/Fun4AllReturnCodes.h>
 #include <fun4all/SubsysReco.h>
 
-#include <phool/getClass.h>
 #include <phool/PHCompositeNode.h>
 #include <phool/PHNodeIterator.h>
+#include <phool/getClass.h>
 #include <phool/phool.h>
 
 #include <TAxis.h>
@@ -33,19 +33,19 @@
 #include <TString.h>
 #include <TVector3.h>
 
-#include <CLHEP/Vector/ThreeVector.h>        // for Hep3Vector
+#include <CLHEP/Vector/ThreeVector.h>  // for Hep3Vector
 
 #include <cassert>
 #include <cstdlib>
 #include <iostream>
-#include <iterator>                          // for reverse_iterator
+#include <iterator>  // for reverse_iterator
 #include <map>
 #include <utility>
 
 using namespace std;
 
 QAG4SimulationEicCalorimeter::QAG4SimulationEicCalorimeter(const string &calo_name,
-                                                     QAG4SimulationEicCalorimeter::enu_flags flags)
+                                                           QAG4SimulationEicCalorimeter::enu_flags flags)
   : SubsysReco("QAG4SimulationEicCalorimeter_" + calo_name)
   , _calo_name(calo_name)
   , _flags(flags)

@@ -50,12 +50,20 @@ void QAInit()
   }
   if (Enable::CEMC && Enable::HCALIN && Enable::HCALOUT)
   {
-// The QA modules also deals with tracking which we do not apply right now
-// so we need to call the module with kProcessCluster
-      QAG4SimulationEicCalorimeterSum *calo_qa =
-	new QAG4SimulationEicCalorimeterSum(QAG4SimulationEicCalorimeterSum::kProcessCluster);
-      //    calo_qa->Verbosity(10);
-      se->registerSubsystem(calo_qa);
+    // The QA modules also deals with tracking which we do not apply right now
+    // so we need to call the module with kProcessCluster
+    QAG4SimulationEicCalorimeterSum *calo_qa = nullptr;
+    if (Enable::TRACKING)
+    {
+      calo_qa = new QAG4SimulationEicCalorimeterSum();
+      calo_qa->set_track_nodename(TRACKING::TrackNodeName);
+    }
+    else
+    {
+      calo_qa = new QAG4SimulationEicCalorimeterSum(QAG4SimulationEicCalorimeterSum::kProcessCluster);
+    }
+    //    calo_qa->Verbosity(10);
+    se->registerSubsystem(calo_qa);
   }
   QAExample *qa = new QAExample();
   //qa->Verbosity(2);
