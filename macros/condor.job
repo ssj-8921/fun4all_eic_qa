@@ -2,7 +2,7 @@ Universe 	= vanilla
 Executable 	= myscript.csh
 notification 	= Never
 Output  	= condor.out
-Error         = condor.err
+Error           = condor.err
 Log  		= /dev/null
 # in case your script is in another directory, set initialdir to it
 #Initialdir  	= 
