@@ -65,7 +65,6 @@ int QAExample::process_event(PHCompositeNode *topNode)
   Fun4AllHistoManager *hm = QAHistManagerDef::getHistoManager();
   assert(hm);
 
-
   // reco pT / gen pT histogram
   TH1 *pT = dynamic_cast<TH1 *>(hm->getHisto(get_histo_prefix() + "pT"));
   assert(pT);
@@ -81,7 +80,6 @@ int QAExample::process_event(PHCompositeNode *topNode)
     return Fun4AllReturnCodes::ABORTRUN;
   }
 
-
   PHG4TruthInfoContainer::ConstRange range = m_truthContainer->GetPrimaryParticleRange();
   for (PHG4TruthInfoContainer::ConstIterator iter = range.first; iter != range.second; ++iter)
   {
@@ -96,10 +94,10 @@ int QAExample::process_event(PHCompositeNode *topNode)
 
     double gpx = g4particle->get_px();
     double gpy = g4particle->get_py();
-    double pt = sqrt(gpx*gpx+gpy*gpy);
+    double pt = sqrt(gpx * gpx + gpy * gpy);
     double gpz = g4particle->get_pz();
     pT->Fill(pt);
-    pTpz->Fill(pt,gpz);
+    pTpz->Fill(pt, gpz);
   }
   return Fun4AllReturnCodes::EVENT_OK;
 }
