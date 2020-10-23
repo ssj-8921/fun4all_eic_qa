@@ -1,20 +1,20 @@
 #ifndef MACRO_FUN4ALLG4EICDETECTOR_C
 #define MACRO_FUN4ALLG4EICDETECTOR_C
 
-#include "GlobalVariables.C"
+#include <GlobalVariables.C>
 
-#include "DisplayOn.C"
-#include "G4Setup_EICDetector.C"
-#include "G4_Bbc.C"
-#include "G4_CaloTrigger.C"
-#include "G4_DSTReader_EICDetector.C"
-#include "G4_FwdJets.C"
-#include "G4_Global.C"
-#include "G4_HIJetReco.C"
-#include "G4_Input.C"
-#include "G4_Jets.C"
-#include "G4_Production.C"
-#include "G4_QA.C"
+#include <DisplayOn.C>
+#include <G4Setup_EICDetector.C>
+#include <G4_Bbc.C>
+#include <G4_CaloTrigger.C>
+#include <G4_DSTReader_EICDetector.C>
+#include <G4_FwdJets.C>
+#include <G4_Global.C>
+#include <G4_HIJetReco.C>
+#include <G4_Input.C>
+#include <G4_Jets.C>
+#include <G4_Production.C>
+#include <G4_QA.C>
 
 #include <qa_modules/QAHistManagerDef.h>
 
@@ -113,38 +113,38 @@ int Fun4All_G4_EICDetector(
   // Simple Input generator:
   if (Input::SIMPLE)
   {
-    INPUTGENERATOR::SimpleEventGenerator->add_particles("e-", 1);
+    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("e-", 1);
     if (Input::HEPMC || Input::EMBED)
     {
-      INPUTGENERATOR::SimpleEventGenerator->set_reuse_existing_vertex(true);
-      INPUTGENERATOR::SimpleEventGenerator->set_existing_vertex_offset_vector(0.0, 0.0, 0.0);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_reuse_existing_vertex(true);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_existing_vertex_offset_vector(0.0, 0.0, 0.0);
     }
     else
     {
-      INPUTGENERATOR::SimpleEventGenerator->set_vertex_distribution_function(PHG4SimpleEventGenerator::Uniform,
-                                                                             PHG4SimpleEventGenerator::Uniform,
-                                                                             PHG4SimpleEventGenerator::Uniform);
-      INPUTGENERATOR::SimpleEventGenerator->set_vertex_distribution_mean(0., 0., 0.);
-      INPUTGENERATOR::SimpleEventGenerator->set_vertex_distribution_width(0., 0., 5.);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_function(PHG4SimpleEventGenerator::Uniform,
+                                                                                PHG4SimpleEventGenerator::Uniform,
+                                                                                PHG4SimpleEventGenerator::Uniform);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., 0.);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 0.);
     }
-    INPUTGENERATOR::SimpleEventGenerator->set_eta_range(-3, 3);
-    INPUTGENERATOR::SimpleEventGenerator->set_phi_range(-M_PI, M_PI);
-    INPUTGENERATOR::SimpleEventGenerator->set_pt_range(0.1, 20.);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-3, 3);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_pt_range(4., 4.);
   }
   // Upsilons
   if (Input::UPSILON)
   {
-    INPUTGENERATOR::VectorMesonGenerator->add_decay_particles("mu", 0);
-    INPUTGENERATOR::VectorMesonGenerator->set_rapidity_range(-1, 1);
-    INPUTGENERATOR::VectorMesonGenerator->set_pt_range(0., 10.);
+    INPUTGENERATOR::VectorMesonGenerator[0]->add_decay_particles("mu", 0);
+    INPUTGENERATOR::VectorMesonGenerator[0]->set_rapidity_range(-1, 1);
+    INPUTGENERATOR::VectorMesonGenerator[0]->set_pt_range(0., 10.);
     // Y species - select only one, last one wins
-    INPUTGENERATOR::VectorMesonGenerator->set_upsilon_1s();
+    INPUTGENERATOR::VectorMesonGenerator[0]->set_upsilon_1s();
   }
   // particle gun
   if (Input::GUN)
   {
-    INPUTGENERATOR::Gun->AddParticle("pi-", 0, 1, 0);
-    INPUTGENERATOR::Gun->set_vtx(0, 0, 0);
+    INPUTGENERATOR::Gun[0]->AddParticle("pi-", 0, 1, 0);
+    INPUTGENERATOR::Gun[0]->set_vtx(0, 0, 0);
   }
   // pythia6
   if (Input::PYTHIA6)
@@ -159,10 +159,10 @@ int Fun4All_G4_EICDetector(
 
   if (Input::HEPMC)
   {
-    INPUTMANAGER::HepMCInputManager->set_vertex_distribution_width(100e-4,100e-4,30,0);//optional collision smear in space, time
-//    INPUTMANAGER::HepMCInputManager->set_vertex_distribution_mean(0,0,0,0);//optional collision central position shift in space, time
+    INPUTMANAGER::HepMCInputManager->set_vertex_distribution_width(100e-4, 100e-4, 30, 0);  //optional collision smear in space, time
+                                                                                            //    INPUTMANAGER::HepMCInputManager->set_vertex_distribution_mean(0,0,0,0);//optional collision central position shift in space, time
     // //optional choice of vertex distribution function in space, time
-    INPUTMANAGER::HepMCInputManager->set_vertex_distribution_function(PHHepMCGenHelper::Gaus,PHHepMCGenHelper::Gaus,PHHepMCGenHelper::Gaus,PHHepMCGenHelper::Gaus);
+    INPUTMANAGER::HepMCInputManager->set_vertex_distribution_function(PHHepMCGenHelper::Gaus, PHHepMCGenHelper::Gaus, PHHepMCGenHelper::Gaus, PHHepMCGenHelper::Gaus);
     //! embedding ID for the event
     //! positive ID is the embedded event of interest, e.g. jetty event from pythia
     //! negative IDs are backgrounds, .e.g out of time pile up collisions
@@ -173,8 +173,8 @@ int Fun4All_G4_EICDetector(
   // register all input generators with Fun4All
   InputRegister();
 
-// set up production relatedstuff
-//   Enable::PRODUCTION = true;
+  // set up production relatedstuff
+  //   Enable::PRODUCTION = true;
 
   //======================
   // Write the DST
@@ -192,7 +192,7 @@ int Fun4All_G4_EICDetector(
   // What to run
   //======================
   // Global options (enabled for all subsystems - if implemented)
-    Enable::ABSORBER = true;
+  Enable::ABSORBER = true;
   //  Enable::OVERLAPCHECK = true;
   //  Enable::VERBOSITY = 1;
 
@@ -271,7 +271,7 @@ int Fun4All_G4_EICDetector(
   Enable::EEMC_CLUSTER = Enable::EEMC_TOWER && true;
   Enable::EEMC_EVAL = Enable::EEMC_CLUSTER && true;
 
-//  Enable::PLUGDOOR = true;
+  //  Enable::PLUGDOOR = true;
 
   // Other options
   Enable::GLOBAL_RECO = true;
