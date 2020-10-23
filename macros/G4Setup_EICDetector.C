@@ -59,30 +59,28 @@ void G4Init()
   }
 
   // load detector/material macros and execute Init() function
-  if (Enable::PIPE)    PipeInit();
+  if (Enable::PIPE) PipeInit();
 
+  if (Enable::PLUGDOOR) PlugDoorInit();
 
-  if (Enable::PLUGDOOR)    PlugDoorInit();
+  if (Enable::EGEM) EGEM_Init();
 
+  if (Enable::FGEM) FGEM_Init();
 
-  if (Enable::EGEM)    EGEM_Init();
+  if (Enable::FST) FST_Init();
 
-  if (Enable::FGEM)    FGEM_Init();
+  if (Enable::BARREL) BarrelInit();
+  if (Enable::MVTX) MvtxInit();
 
-  if (Enable::FST)    FST_Init();
-
-  if (Enable::BARREL)    BarrelInit();
-  if (Enable::MVTX)  MvtxInit();
-
-  if (Enable::TPC)  TPCInit();
+  if (Enable::TPC) TPCInit();
 
   if (Enable::TRACKING) TrackingInit();
 
-  if (Enable::CEMC)    CEmcInit(72); 
+  if (Enable::CEMC) CEmcInit(72);
 
-  if (Enable::HCALIN)    HCalInnerInit(1);
+  if (Enable::HCALIN) HCalInnerInit(1);
 
-  if (Enable::MAGNET)  MagnetInit();
+  if (Enable::MAGNET) MagnetInit();
 
   if (Enable::HCALOUT) HCalOuterInit();
 
@@ -94,9 +92,9 @@ void G4Init()
 
   if (Enable::DIRC) DIRCInit();
 
-  if (Enable::RICH)    RICHInit();
+  if (Enable::RICH) RICHInit();
 
-  if (Enable::AEROGEL)    AerogelInit();
+  if (Enable::AEROGEL) AerogelInit();
   if (Enable::USER) UserInit();
 
   if (Enable::BLACKHOLE) BlackHoleInit();
