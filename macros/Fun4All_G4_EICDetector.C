@@ -274,7 +274,7 @@ int Fun4All_G4_EICDetector(
   //  Enable::PLUGDOOR = true;
 
   // Other options
-  Enable::GLOBAL_RECO = true;
+  // Enable::GLOBAL_RECO = true;
   Enable::GLOBAL_FASTSIM = true;
 
   Enable::CALOTRIGGER = true && Enable::CEMC_TOWER && Enable::HCALIN_TOWER && Enable::HCALOUT_TOWER;
