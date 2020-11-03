@@ -6,7 +6,9 @@
 #include <cmath>
 
 class EvalHit;
+class EvalTower;
 class PHG4Hit;
+class RawTower;
 class TClonesArray;
 
 class EvalRootTTree : public PHObject
@@ -15,7 +17,10 @@ public:
   EvalRootTTree();
   virtual ~EvalRootTTree();
   void Reset();
+
   EvalHit* AddHit(const PHG4Hit *g4hit);
+  EvalTower* AddTower(const RawTower *twr);
+
   void set_event_number(const int i) {event = i;}
 
   void set_gvx(const double v) {gvx = v;}
@@ -32,6 +37,9 @@ public:
   void set_gtheta(const double d) {gtheta = d;}
 
 private:
+  TClonesArray* SnglHits = nullptr;
+  TClonesArray* SnglTowers = nullptr;
+
   int event = 0;
   double gvx = NAN;
   double gvy = NAN;
@@ -45,7 +53,6 @@ private:
   double gtheta = NAN;
   
 
-  TClonesArray* SnglHits = nullptr;
 
   ClassDef(EvalRootTTree,1)
 
