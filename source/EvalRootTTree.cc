@@ -4,7 +4,7 @@
 #include "EvalHit.h"
 #include "EvalTower.h"
 
-#include <g4main/PHG4Hit.h>      // for PHG4Hit
+#include <g4main/PHG4Hit.h>  // for PHG4Hit
 
 #include <calobase/RawCluster.h>
 #include <calobase/RawTower.h>
@@ -17,9 +17,9 @@ static const int NCLU = 100;
 
 EvalRootTTree::EvalRootTTree()
 {
-  SnglHits = new TClonesArray("EvalHit",NHIT);
-  SnglTowers = new TClonesArray("EvalTower",NTWR);
-  SnglClusters = new TClonesArray("EvalCluster",NCLU);
+  SnglHits = new TClonesArray("EvalHit", NHIT);
+  SnglTowers = new TClonesArray("EvalTower", NTWR);
+  SnglClusters = new TClonesArray("EvalCluster", NCLU);
 }
 
 EvalRootTTree::~EvalRootTTree()
@@ -69,7 +69,7 @@ EvalRootTTree::AddHit(const PHG4Hit *g4hit)
   int nextindex = SnglHits->GetLast() + 1;
   if (nextindex == SnglHits->GetSize())
   {
-    SnglHits->Expand(SnglHits->GetSize() + NHIT/10);
+    SnglHits->Expand(SnglHits->GetSize() + NHIT / 10);
   }
   new (cl[nextindex]) EvalHit(g4hit);
   return (static_cast<EvalHit *>(cl[nextindex]));
@@ -82,7 +82,7 @@ EvalRootTTree::AddTower(const RawTower *twr)
   int nextindex = SnglTowers->GetLast() + 1;
   if (nextindex == SnglTowers->GetSize())
   {
-    SnglTowers->Expand(SnglTowers->GetSize() + NTWR/10);
+    SnglTowers->Expand(SnglTowers->GetSize() + NTWR / 10);
   }
   new (cl[nextindex]) EvalTower(twr);
   return (static_cast<EvalTower *>(cl[nextindex]));
@@ -95,7 +95,7 @@ EvalRootTTree::AddCluster(const RawCluster *clus)
   int nextindex = SnglClusters->GetLast() + 1;
   if (nextindex == SnglClusters->GetSize())
   {
-    SnglClusters->Expand(SnglClusters->GetSize() + NCLU/10);
+    SnglClusters->Expand(SnglClusters->GetSize() + NCLU / 10);
   }
   new (cl[nextindex]) EvalCluster(clus);
   return (static_cast<EvalCluster *>(cl[nextindex]));
