@@ -14,6 +14,7 @@ libeicqa_modules_la_LDFLAGS = \
   -L$(OFFLINE_MAIN)/lib
 
 libeicqa_modules_la_LIBADD = \
+   -lCLHEP \
   -lqa_modules
 
 pkginclude_HEADERS = \
@@ -24,12 +25,14 @@ pkginclude_HEADERS = \
   QAG4SimulationEicCalorimeterSum.h
 
 ROOTDICTS = \
+  EvalCluster_Dict.cc \
   EvalHit_Dict.cc \
   EvalTower_Dict.cc \
   EvalRootTTree_Dict.cc
 
 pcmdir = $(libdir)
 nobase_dist_pcm_DATA = \
+  EvalCluster_Dict_rdict.pcm \
   EvalHit_Dict_rdict.pcm \
   EvalTower_Dict_rdict.pcm \
   EvalRootTTree_Dict_rdict.pcm
@@ -37,6 +40,7 @@ nobase_dist_pcm_DATA = \
 libeicqa_modules_la_SOURCES = \
   $(ROOTDICTS) \
   EvalHit.cc \
+  EvalCluster.cc \
   EvalTower.cc \
   EvalRootTTree.cc \
   EvalRootTTreeReco.cc \

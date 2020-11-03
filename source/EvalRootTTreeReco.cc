@@ -11,6 +11,8 @@
 #include <g4main/PHG4VtxPoint.h>
 #include <g4main/PHG4Hit.h>
 
+#include <calobase/RawCluster.h>
+#include <calobase/RawClusterContainer.h>
 #include <calobase/RawTower.h>
 #include <calobase/RawTowerContainer.h>
 #include <calobase/RawTowerGeomContainer.h>
@@ -126,10 +128,22 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
      RawTower *twr = tower_iter->second;
      EvalTower *evaltwr = evaltree->AddTower(twr);
      evaltwr->set_eta(rawtowergeom->get_etacenter(twr->get_bineta()));
-     evaltwr->set_eta(rawtowergeom->get_thetacenter(twr->get_bintheta()));
+//     evaltwr->set_eta(rawtowergeom->get_thetacenter(twr->get_bintheta()));
      evaltwr->set_phi(rawtowergeom->get_phicenter(twr->get_binphi()));
    }
  }
+// Clusters
+    RawClusterContainer* clusters = findNode::getClass<RawClusterContainer>(topNode, m_ClusterNodeName);
+    if (clusters)
+    {
+    for (const auto& iterator : clusters->getClustersMap())
+    {
+      RawCluster* cluster = iterator.second;
+      evaltree->AddCluster( cluster);
+    }
+    }
+
+
   return Fun4AllReturnCodes::EVENT_OK;
 }
 
@@ -170,4 +184,6 @@ m_OutputNode = "EvalTTree_" + name;
 m_HitNodeName = "G4HIT_" + name;
 m_TowerNodeName = "TOWER_SIM_" + name;
 m_TowerGeoNodeName = "TOWERGEOM_" + name;
+m_ClusterNodeName = "CLUSTER_" + name;
 }
+

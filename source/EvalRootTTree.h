@@ -7,8 +7,10 @@
 
 class EvalHit;
 class EvalTower;
+class EvalCluster;
 class PHG4Hit;
 class RawTower;
+class RawCluster;
 class TClonesArray;
 
 class EvalRootTTree : public PHObject
@@ -20,7 +22,7 @@ public:
 
   EvalHit* AddHit(const PHG4Hit *g4hit);
   EvalTower* AddTower(const RawTower *twr);
-
+  EvalCluster *AddCluster(const RawCluster *clus);
   void set_event_number(const int i) {event = i;}
 
   void set_gvx(const double v) {gvx = v;}
@@ -39,6 +41,7 @@ public:
 private:
   TClonesArray* SnglHits = nullptr;
   TClonesArray* SnglTowers = nullptr;
+  TClonesArray* SnglClusters = nullptr;
 
   int event = 0;
   double gvx = NAN;
