@@ -12,7 +12,6 @@ class PHCompositeNode;
 class EvalRootTTreeReco : public SubsysReco
 {
  public:
-
   EvalRootTTreeReco(const std::string &name = "EvalRootTTreeReco");
 
   virtual ~EvalRootTTreeReco();
@@ -53,7 +52,6 @@ class EvalRootTTreeReco : public SubsysReco
   void Detector(const std::string &name);
 
  private:
-
   std::string m_Detector;
 
   std::string m_OutputNode;
@@ -63,4 +61,4 @@ class EvalRootTTreeReco : public SubsysReco
   std::string m_ClusterNodeName;
 };
 
-#endif // EVALROOTTTREERECO_H
+#endif  // EVALROOTTTREERECO_H

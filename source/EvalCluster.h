@@ -7,10 +7,9 @@
 
 class RawCluster;
 
-class EvalCluster: public PHObject
+class EvalCluster : public PHObject
 {
-
-public:
+ public:
   EvalCluster(const RawCluster *twr);
   virtual ~EvalCluster() {}
 
