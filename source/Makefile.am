@@ -25,16 +25,19 @@ pkginclude_HEADERS = \
 
 ROOTDICTS = \
   EvalHit_Dict.cc \
+  EvalTower_Dict.cc \
   EvalRootTTree_Dict.cc
 
 pcmdir = $(libdir)
 nobase_dist_pcm_DATA = \
   EvalHit_Dict_rdict.pcm \
+  EvalTower_Dict_rdict.pcm \
   EvalRootTTree_Dict_rdict.pcm
 
 libeicqa_modules_la_SOURCES = \
   $(ROOTDICTS) \
   EvalHit.cc \
+  EvalTower.cc \
   EvalRootTTree.cc \
   EvalRootTTreeReco.cc \
   QAExample.cc \

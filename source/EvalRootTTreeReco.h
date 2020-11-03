@@ -58,6 +58,8 @@ class EvalRootTTreeReco : public SubsysReco
 
   std::string m_OutputNode;
   std::string m_HitNodeName;
+  std::string m_TowerNodeName;
+  std::string m_TowerGeoNodeName;
 };
 
 #endif // EVALROOTTTREERECO_H
