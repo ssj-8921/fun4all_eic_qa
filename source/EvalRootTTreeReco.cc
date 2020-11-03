@@ -3,12 +3,17 @@
 
 #include "EvalRootTTree.h"
 #include "EvalHit.h"
+#include "EvalTower.h"
 
 #include <g4main/PHG4TruthInfoContainer.h>
 #include <g4main/PHG4HitContainer.h>
 #include <g4main/PHG4Particle.h>
 #include <g4main/PHG4VtxPoint.h>
 #include <g4main/PHG4Hit.h>
+
+#include <calobase/RawTower.h>
+#include <calobase/RawTowerContainer.h>
+#include <calobase/RawTowerGeomContainer.h>
 
 #include <fun4all/Fun4AllReturnCodes.h>
 
@@ -65,10 +70,12 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
     evaltree->set_gvy(gvertex->get_y());
     evaltree->set_gvz(gvertex->get_z());
     PHG4TruthInfoContainer::ConstRange range = truthinfo->GetPrimaryParticleRange();
+    int justone = 0;
     for (PHG4TruthInfoContainer::ConstIterator iter = range.first;
          iter != range.second;
          ++iter)
     {
+      justone++;
       PHG4Particle* primary = iter->second;
       double gpx = primary->get_px();
       double gpy = primary->get_py();
@@ -89,14 +96,39 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
       evaltree->set_gphi(atan2(gpy, gpx));
       evaltree->set_gtheta(acos(gpz/gmom));
     }
+      if (justone > 1)
+      {
+	std::cout << "this only works for single particle events" 
+		  << " here I see " << justone << " primaries" << std::endl;
+	gSystem->Exit(1);
+      }
+
+// add hits
  PHG4HitContainer *g4hits = findNode::getClass<PHG4HitContainer>(topNode,m_HitNodeName);
  if (g4hits)
  {
     PHG4HitContainer::ConstRange hit_range = g4hits->getHits();
     for (PHG4HitContainer::ConstIterator hit_iter = hit_range.first; hit_iter != hit_range.second; hit_iter++)
     {
-      EvalHit *hit = evaltree->AddHit(hit_iter->second);
+      evaltree->AddHit(hit_iter->second);
     }
+ }
+
+// add towers
+  RawTowerGeomContainer *rawtowergeom = findNode::getClass<RawTowerGeomContainer>(topNode,  m_TowerGeoNodeName);
+
+ RawTowerContainer *g4towers = findNode::getClass<RawTowerContainer>(topNode, m_TowerNodeName);
+ if (g4towers)
+ {
+   RawTowerContainer::ConstRange tower_range = g4towers->getTowers();
+   for (RawTowerContainer::ConstIterator tower_iter = tower_range.first; tower_iter != tower_range.second; tower_iter++)
+   {
+     RawTower *twr = tower_iter->second;
+     EvalTower *evaltwr = evaltree->AddTower(twr);
+     evaltwr->set_eta(rawtowergeom->get_etacenter(twr->get_bineta()));
+     evaltwr->set_eta(rawtowergeom->get_thetacenter(twr->get_bintheta()));
+     evaltwr->set_phi(rawtowergeom->get_phicenter(twr->get_binphi()));
+   }
  }
   return Fun4AllReturnCodes::EVENT_OK;
 }
@@ -136,4 +168,6 @@ void EvalRootTTreeReco::Detector(const std::string &name)
 m_Detector = name;
 m_OutputNode = "EvalTTree_" + name;
 m_HitNodeName = "G4HIT_" + name;
+m_TowerNodeName = "TOWER_SIM_" + name;
+m_TowerGeoNodeName = "TOWERGEOM_" + name;
 }
