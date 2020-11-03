@@ -9,8 +9,7 @@ class PHG4Hit;
 
 class EvalHit : public PHObject
 {
-
-public:
+ public:
   EvalHit(const PHG4Hit *g4hit);
   virtual ~EvalHit() {}
 
@@ -24,9 +23,9 @@ public:
   /* void set_eion(const float f) {eion = f;} */
   /* void set_light_yield(const float f) {light_yield = f;} */
 
-  float get_xin() const {return xin;}
+  float get_xin() const { return xin; }
 
-private:
+ private:
   int detid = -9999;
   int trackid = 0;
   float xin = NAN;
@@ -41,7 +40,7 @@ private:
   float eion = NAN;
   float light_yield = NAN;
 
-  ClassDef(EvalHit,1)
+  ClassDef(EvalHit, 1)
 };
 
 #endif
