@@ -113,7 +113,7 @@ int Fun4All_G4_EICDetector(
   // Simple Input generator:
   if (Input::SIMPLE)
   {
-    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("e-", 1);
+    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("pi-", 1);
     if (Input::HEPMC || Input::EMBED)
     {
       INPUTGENERATOR::SimpleEventGenerator[0]->set_reuse_existing_vertex(true);
@@ -127,7 +127,7 @@ int Fun4All_G4_EICDetector(
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., 0.);
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 0.);
     }
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-3, 3);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(1.5, 4);
     INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);
     INPUTGENERATOR::SimpleEventGenerator[0]->set_pt_range(4., 4.);
   }
@@ -180,13 +180,13 @@ int Fun4All_G4_EICDetector(
   // Write the DST
   //======================
 
-  //  Enable::DSTOUT = true;
+  Enable::DSTOUT = true;
   DstOut::OutputDir = outdir;
   DstOut::OutputFile = outputFile;
   Enable::DSTOUT_COMPRESS = false;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
-  Enable::DSTREADER = true;
+  // Enable::DSTREADER = true;
 
   //======================
   // What to run
@@ -213,7 +213,7 @@ int Fun4All_G4_EICDetector(
   Enable::TPC = true;
 
   Enable::TRACKING = true;
-  Enable::TRACKING_EVAL = Enable::TRACKING && true;
+//  Enable::TRACKING_EVAL = Enable::TRACKING && true;
   G4TRACKING::DISPLACED_VERTEX = false;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                          // projections to calorimeters
   G4TRACKING::PROJECTION_CEMC = false;
@@ -252,22 +252,19 @@ int Fun4All_G4_EICDetector(
 
   Enable::FEMC = true;
   //  Enable::FEMC_ABSORBER = true;
-  Enable::FEMC_CELL = Enable::FEMC && true;
-  Enable::FEMC_TOWER = Enable::FEMC_CELL && true;
+  Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
   Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
   Enable::FHCAL = true;
   //  Enable::FHCAL_ABSORBER = true;
-  Enable::FHCAL_CELL = Enable::FHCAL && true;
-  Enable::FHCAL_TOWER = Enable::FHCAL_CELL && true;
+  Enable::FHCAL_TOWER = Enable::FHCAL && true;
   Enable::FHCAL_CLUSTER = Enable::FHCAL_TOWER && true;
   Enable::FHCAL_EVAL = Enable::FHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
   Enable::EEMC = true;
-  Enable::EEMC_CELL = Enable::EEMC && true;
-  Enable::EEMC_TOWER = Enable::EEMC_CELL && true;
+  Enable::EEMC_TOWER = Enable::EEMC && true;
   Enable::EEMC_CLUSTER = Enable::EEMC_TOWER && true;
   Enable::EEMC_EVAL = Enable::EEMC_CLUSTER && true;
 
@@ -345,7 +342,7 @@ int Fun4All_G4_EICDetector(
   }
 
   //------------------
-  // Detector Division
+  // Detector Division (only for barrel calorimeters)
   //------------------
 
   if (Enable::CEMC_CELL) CEMC_Cells();
@@ -353,12 +350,6 @@ int Fun4All_G4_EICDetector(
   if (Enable::HCALIN_CELL) HCALInner_Cells();
 
   if (Enable::HCALOUT_CELL) HCALOuter_Cells();
-
-  if (Enable::FEMC_CELL) FEMC_Cells();
-
-  if (Enable::FHCAL_CELL) FHCAL_Cells();
-
-  if (Enable::EEMC_CELL) EEMC_Cells();
 
   //-----------------------------
   // CEMC towering and clustering
