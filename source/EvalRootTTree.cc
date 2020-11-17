@@ -50,6 +50,7 @@ void EvalRootTTree::Reset()
     SnglClusters->Expand(NTWR);
   }
   event = 0;
+  gpid = -99999;
   gvx = NAN;
   gvy = NAN;
   gvz = NAN;

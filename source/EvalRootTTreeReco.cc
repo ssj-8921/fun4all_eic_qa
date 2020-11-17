@@ -15,6 +15,7 @@
 #include <calobase/RawClusterContainer.h>
 #include <calobase/RawTower.h>
 #include <calobase/RawTowerContainer.h>
+#include <calobase/RawTowerGeom.h>
 #include <calobase/RawTowerGeomContainer.h>
 
 #include <fun4all/Fun4AllReturnCodes.h>
@@ -89,6 +90,7 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
     evaltree->set_gpy(gpy);
     evaltree->set_gpz(gpz);
     evaltree->set_ge(primary->get_e());
+    evaltree->set_gpid(primary->get_pid());
     double geta = NAN;
     if (gpt > 0)
     {
@@ -117,7 +119,7 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
   }
 
   // add towers
-  RawTowerGeomContainer *rawtowergeom = findNode::getClass<RawTowerGeomContainer>(topNode, m_TowerGeoNodeName);
+  RawTowerGeomContainer *rawtowergeomcontainer = findNode::getClass<RawTowerGeomContainer>(topNode, m_TowerGeoNodeName);
 
   RawTowerContainer *g4towers = findNode::getClass<RawTowerContainer>(topNode, m_TowerNodeName);
   if (g4towers)
@@ -127,9 +129,10 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
     {
       RawTower *twr = tower_iter->second;
       EvalTower *evaltwr = evaltree->AddTower(twr);
-      evaltwr->set_eta(rawtowergeom->get_etacenter(twr->get_bineta()));
-      //     evaltwr->set_eta(rawtowergeom->get_thetacenter(twr->get_bintheta()));
-      evaltwr->set_phi(rawtowergeom->get_phicenter(twr->get_binphi()));
+      RawTowerGeom *geom = rawtowergeomcontainer->get_tower_geometry(twr->get_key());
+      evaltwr->set_eta(geom->get_eta());
+      evaltwr->set_theta(geom->get_theta());
+      evaltwr->set_phi(geom->get_phi());
     }
   }
   // Clusters
