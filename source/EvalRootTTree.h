@@ -24,6 +24,7 @@ class EvalRootTTree : public PHObject
   EvalTower* AddTower(const RawTower* twr);
   EvalCluster* AddCluster(const RawCluster* clus);
   void set_event_number(const int i) { event = i; }
+  void set_gpid(const int i) { gpid = i; }
 
   void set_gvx(const double v) { gvx = v; }
   void set_gvy(const double v) { gvy = v; }
@@ -44,6 +45,7 @@ class EvalRootTTree : public PHObject
   TClonesArray* SnglClusters = nullptr;
 
   int event = 0;
+  int gpid = -99999;
   double gvx = NAN;
   double gvy = NAN;
   double gvz = NAN;
