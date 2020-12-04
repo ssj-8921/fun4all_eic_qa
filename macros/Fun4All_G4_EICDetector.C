@@ -14,7 +14,7 @@
 #include <G4_Input.C>
 #include <G4_Jets.C>
 #include <G4_Production.C>
-#include <G4_QA.C>
+#include <G4_QA_EIC.C>
 
 #include <qa_modules/QAHistManagerDef.h>
 
