@@ -7,7 +7,6 @@
 #include <memory>
 #include <string>
 
-
 class CaloEvalStack;
 class PHCompositeNode;
 class PHG4HitContainer;
@@ -27,8 +26,8 @@ class QAG4SimulationEicCalorimeter : public SubsysReco
   };
 
   QAG4SimulationEicCalorimeter(const std::string &calo_name, enu_flags flags =
-                                                              kDefaultFlag);
-  virtual ~QAG4SimulationEicCalorimeter(){}
+                                                                 kDefaultFlag);
+  virtual ~QAG4SimulationEicCalorimeter() {}
 
   int Init(PHCompositeNode *topNode);
   int InitRun(PHCompositeNode *topNode);

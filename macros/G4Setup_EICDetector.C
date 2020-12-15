@@ -1,30 +1,30 @@
 #ifndef MACRO_G4SETUPEICDETECTOR_C
 #define MACRO_G4SETUPEICDETECTOR_C
 
-#include "GlobalVariables.C"
+#include <GlobalVariables.C>
 
-#include "G4_Aerogel.C"
-#include "G4_Barrel_EIC.C"
-#include "G4_BlackHole.C"
-#include "G4_CEmc_EIC.C"
-#include "G4_DIRC.C"
-#include "G4_EEMC.C"
-#include "G4_FEMC_EIC.C"
-#include "G4_FHCAL.C"
-#include "G4_FST_EIC.C"
-#include "G4_GEM_EIC.C"
-#include "G4_HcalIn_ref.C"
-#include "G4_HcalOut_ref.C"
-#include "G4_Input.C"
-#include "G4_Magnet.C"
-#include "G4_Mvtx_EIC.C"
-#include "G4_Pipe_EIC.C"
-#include "G4_PlugDoor_EIC.C"
-#include "G4_RICH.C"
-#include "G4_TPC_EIC.C"
-#include "G4_Tracking_EIC.C"
-#include "G4_User.C"
-#include "G4_World.C"
+#include <G4_Aerogel.C>
+#include <G4_Barrel_EIC.C>
+#include <G4_BlackHole.C>
+#include <G4_CEmc_EIC.C>
+#include <G4_DIRC.C>
+#include <G4_EEMC.C>
+#include <G4_FEMC_EIC.C>
+#include <G4_FHCAL.C>
+#include <G4_FST_EIC.C>
+#include <G4_GEM_EIC.C>
+#include <G4_HcalIn_ref.C>
+#include <G4_HcalOut_ref.C>
+#include <G4_Input.C>
+#include <G4_Magnet.C>
+#include <G4_Mvtx_EIC.C>
+#include <G4_Pipe_EIC.C>
+#include <G4_PlugDoor_EIC.C>
+#include <G4_RICH.C>
+#include <G4_TPC_EIC.C>
+#include <G4_Tracking_EIC.C>
+#include <G4_User.C>
+#include <G4_World.C>
 
 #include <g4detectors/PHG4CylinderSubsystem.h>
 
@@ -59,30 +59,28 @@ void G4Init()
   }
 
   // load detector/material macros and execute Init() function
-  if (Enable::PIPE)    PipeInit();
+  if (Enable::PIPE) PipeInit();
 
+  if (Enable::PLUGDOOR) PlugDoorInit();
 
-  if (Enable::PLUGDOOR)    PlugDoorInit();
+  if (Enable::EGEM) EGEM_Init();
 
+  if (Enable::FGEM) FGEM_Init();
 
-  if (Enable::EGEM)    EGEM_Init();
+  if (Enable::FST) FST_Init();
 
-  if (Enable::FGEM)    FGEM_Init();
+  if (Enable::BARREL) BarrelInit();
+  if (Enable::MVTX) MvtxInit();
 
-  if (Enable::FST)    FST_Init();
-
-  if (Enable::BARREL)    BarrelInit();
-  if (Enable::MVTX)  MvtxInit();
-
-  if (Enable::TPC)  TPCInit();
+  if (Enable::TPC) TPCInit();
 
   if (Enable::TRACKING) TrackingInit();
 
-  if (Enable::CEMC)    CEmcInit(72); 
+  if (Enable::CEMC) CEmcInit(72);
 
-  if (Enable::HCALIN)    HCalInnerInit(1);
+  if (Enable::HCALIN) HCalInnerInit(1);
 
-  if (Enable::MAGNET)  MagnetInit();
+  if (Enable::MAGNET) MagnetInit();
 
   if (Enable::HCALOUT) HCalOuterInit();
 
@@ -94,9 +92,9 @@ void G4Init()
 
   if (Enable::DIRC) DIRCInit();
 
-  if (Enable::RICH)    RICHInit();
+  if (Enable::RICH) RICHInit();
 
-  if (Enable::AEROGEL)    AerogelInit();
+  if (Enable::AEROGEL) AerogelInit();
   if (Enable::USER) UserInit();
 
   if (Enable::BLACKHOLE) BlackHoleInit();
