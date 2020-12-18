@@ -39,6 +39,10 @@ class EvalRootTTree : public PHObject
   void set_gphi(const double d) { gphi = d; }
   void set_gtheta(const double d) { gtheta = d; }
 
+  void set_nhits(const int n) {nhits = n;}
+  void set_ntowers(const int n) {ntowers = n;}
+  void set_nclusters(const int n) {nclusters = n;}
+
  private:
   TClonesArray* SnglHits = nullptr;
   TClonesArray* SnglTowers = nullptr;
@@ -46,6 +50,9 @@ class EvalRootTTree : public PHObject
 
   int event = 0;
   int gpid = -99999;
+  int nhits = 0;
+  int ntowers = 0;
+  int nclusters = 0;
   double gvx = NAN;
   double gvy = NAN;
   double gvz = NAN;
