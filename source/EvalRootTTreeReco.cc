@@ -109,8 +109,10 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
 
   // add hits
   PHG4HitContainer *g4hits = findNode::getClass<PHG4HitContainer>(topNode, m_HitNodeName);
+
   if (g4hits)
   {
+    evaltree->set_nhits(g4hits->size());
     PHG4HitContainer::ConstRange hit_range = g4hits->getHits();
     for (PHG4HitContainer::ConstIterator hit_iter = hit_range.first; hit_iter != hit_range.second; hit_iter++)
     {
@@ -124,6 +126,7 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
   RawTowerContainer *g4towers = findNode::getClass<RawTowerContainer>(topNode, m_TowerNodeName);
   if (g4towers)
   {
+    evaltree->set_ntowers(g4towers->size());
     RawTowerContainer::ConstRange tower_range = g4towers->getTowers();
     for (RawTowerContainer::ConstIterator tower_iter = tower_range.first; tower_iter != tower_range.second; tower_iter++)
     {
@@ -139,6 +142,7 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
   RawClusterContainer *clusters = findNode::getClass<RawClusterContainer>(topNode, m_ClusterNodeName);
   if (clusters)
   {
+    evaltree->set_nclusters(clusters->size());
     for (const auto &iterator : clusters->getClustersMap())
     {
       RawCluster *cluster = iterator.second;
