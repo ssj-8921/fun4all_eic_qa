@@ -11,6 +11,12 @@ The QA package for the EIC specific detectors. The code is in source, the macros
 
   * QAExample: Example template to make your own
 
+## Trouble Shooting
+
+  Libraries and macros are under development and it is inevitable that sometimes things break. We make a real effort to keep this repository working, if you encounter problems with your private version, please update your version with the repo versions. For quick questions, we have a Matrtermost suport channel for the qa:
+
+https://chat.sdcc.bnl.gov/eic/channels/fun4all-based-eic-qa
+
 ## How to work with this (you do need a github account)
 
   First you should create your own fork of this repository. Then you have your own copy and can work with it. You'll find the Fork button in the upper right corner. Then you can clone your repository to your local host:
