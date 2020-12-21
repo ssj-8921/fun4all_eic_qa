@@ -13,16 +13,22 @@ class EvalTower : public PHObject
   EvalTower(const RawTower *twr);
   virtual ~EvalTower() {}
 
-  void set_eta(const float f) { teta = f; }
-  void set_theta(const float f) { ttheta = f; }
-  void set_phi(const float f) { tphi = f; }
+  void set_te(const float f) { te = f; }
+  void set_teta(const float f) { teta = f; }
+  void set_tt(const float f) { tt = f; }
+  void set_ttheta(const float f) { ttheta = f; }
+  void set_tphi(const float f) { tphi = f; }
+  void set_tx(const float f) {tx = f;}
+  void set_ty(const float f) {ty = f;}
 
  private:
-  float teta = NAN;
-  float ttheta = NAN;
-  float tphi = NAN;
   float te = NAN;
+  float teta = NAN;
+  float tphi = NAN;
   float tt = NAN;
+  float ttheta = NAN;
+  float tx = NAN;
+  float ty = NAN;
 
   ClassDef(EvalTower, 1)
 };
