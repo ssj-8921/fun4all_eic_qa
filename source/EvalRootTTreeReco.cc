@@ -139,6 +139,7 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
       evaltwr->set_tphi(geom->get_phi());
       evaltwr->set_tx(geom->get_center_x());
       evaltwr->set_ty(geom->get_center_y());
+      evaltwr->set_tz(geom->get_center_z());
     }
   }
   // Clusters

@@ -21,6 +21,7 @@ class EvalCluster : public PHObject
   void set_ctheta(const float f) { ctheta = f; }
   void set_cx(const float f) { cx = f; }
   void set_cy(const float f) { cy = f; }
+  void set_cz(const float f) { cz = f; }
 
  private:
   int ctowers = 0;
@@ -30,6 +31,7 @@ class EvalCluster : public PHObject
   float ctheta = NAN;
   float cx = NAN;
   float cy = NAN;
+  float cz = NAN;
 
   ClassDef(EvalCluster, 1)
 };

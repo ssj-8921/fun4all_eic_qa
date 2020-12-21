@@ -20,6 +20,7 @@ class EvalTower : public PHObject
   void set_tphi(const float f) { tphi = f; }
   void set_tx(const float f) { tx = f; }
   void set_ty(const float f) { ty = f; }
+  void set_tz(const float f) { tz = f; }
 
  private:
   float te = NAN;
@@ -29,6 +30,7 @@ class EvalTower : public PHObject
   float ttheta = NAN;
   float tx = NAN;
   float ty = NAN;
+  float tz = NAN;
 
   ClassDef(EvalTower, 1)
 };
