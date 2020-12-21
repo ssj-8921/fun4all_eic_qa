@@ -1,25 +1,20 @@
-#ifndef MACRO_G4QA_C
-#define MACRO_G4QA_C
+#ifndef MACRO_G4QAEIC_C
+#define MACRO_G4QAEIC_C
 
-#include "GlobalVariables.C"
+#include <GlobalVariables.C>
 
-#include "G4_CEmc_EIC.C"
-#include "G4_EEMC.C"
-#include "G4_FEMC_EIC.C"
-#include "G4_FHCAL.C"
-#include "G4_HcalIn_ref.C"
-#include "G4_HcalOut_ref.C"
+#include <G4_CEmc_EIC.C>
+#include <G4_EEMC.C>
+#include <G4_FEMC_EIC.C>
+#include <G4_FHCAL.C>
+#include <G4_HcalIn_ref.C>
+#include <G4_HcalOut_ref.C>
 
 #include <eicqa_modules/QAExample.h>
 #include <eicqa_modules/QAG4SimulationEicCalorimeter.h>
 #include <eicqa_modules/QAG4SimulationEicCalorimeterSum.h>
 
 R__LOAD_LIBRARY(libeicqa_modules.so)
-
-namespace Enable
-{
-  bool QA = false;
-}
 
 void QAInit()
 {
@@ -70,4 +65,4 @@ void QAInit()
   se->registerSubsystem(qa);
 }
 
-#endif  // MACRO_G4QA_C
+#endif  // MACRO_G4QAEIC_C
