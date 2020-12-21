@@ -13,14 +13,14 @@ class EvalCluster : public PHObject
   EvalCluster(const RawCluster *twr);
   virtual ~EvalCluster() {}
 
-  void set_ctowers(const int i) {ctowers = i;}
+  void set_ctowers(const int i) { ctowers = i; }
 
-  void set_ce(const float f) {ce = f;}
-  void set_ceta(const float f) {ceta = f;}
-  void set_cphi(const float f) {cphi = f;}
-  void set_ctheta(const float f) {ctheta = f;}
-  void set_cx(const float f) {cx = f;}
-  void set_cy(const float f) {cy = f;}
+  void set_ce(const float f) { ce = f; }
+  void set_ceta(const float f) { ceta = f; }
+  void set_cphi(const float f) { cphi = f; }
+  void set_ctheta(const float f) { ctheta = f; }
+  void set_cx(const float f) { cx = f; }
+  void set_cy(const float f) { cy = f; }
 
  private:
   int ctowers = 0;
