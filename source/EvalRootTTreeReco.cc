@@ -1,6 +1,7 @@
 
 #include "EvalRootTTreeReco.h"
 
+#include "EvalCluster.h"
 #include "EvalHit.h"
 #include "EvalRootTTree.h"
 #include "EvalTower.h"
@@ -133,9 +134,12 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
       RawTower *twr = tower_iter->second;
       EvalTower *evaltwr = evaltree->AddTower(twr);
       RawTowerGeom *geom = rawtowergeomcontainer->get_tower_geometry(twr->get_key());
-      evaltwr->set_eta(geom->get_eta());
-      evaltwr->set_theta(geom->get_theta());
-      evaltwr->set_phi(geom->get_phi());
+      evaltwr->set_teta(geom->get_eta());
+      evaltwr->set_ttheta(geom->get_theta());
+      evaltwr->set_tphi(geom->get_phi());
+      evaltwr->set_tx(geom->get_center_x());
+      evaltwr->set_ty(geom->get_center_y());
+      evaltwr->set_tz(geom->get_center_z());
     }
   }
   // Clusters
@@ -188,7 +192,7 @@ void EvalRootTTreeReco::Detector(const std::string &name)
   m_Detector = name;
   m_OutputNode = "EvalTTree_" + name;
   m_HitNodeName = "G4HIT_" + name;
-  m_TowerNodeName = "TOWER_SIM_" + name;
+  m_TowerNodeName = "TOWER_CALIB_" + name;
   m_TowerGeoNodeName = "TOWERGEOM_" + name;
   m_ClusterNodeName = "CLUSTER_" + name;
 }
