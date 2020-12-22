@@ -9,10 +9,10 @@
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libeicqa_modules.so)
 
-void RunEval(const std::string &detector, const std::string &fname, const int nevnt = 0)
+void RunEval(const std::string &detector, const std::string &fname, const int nevnt = 0, const std::string &outdir = ".")
 {
   gSystem->Load("libg4dst");
-  std::string outfile = "Eval_" + detector + ".root";
+  std::string outfile = outdir + "/Eval_" + detector + ".root";
   std::string outnode = "EvalTTree_" + detector;
   Fun4AllServer *se = Fun4AllServer::instance();
   EvalRootTTreeReco *eval = new EvalRootTTreeReco();

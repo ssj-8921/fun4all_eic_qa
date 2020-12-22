@@ -1,6 +1,7 @@
 
 #include "EvalRootTTreeReco.h"
 
+#include "EvalCluster.h"
 #include "EvalHit.h"
 #include "EvalRootTTree.h"
 #include "EvalTower.h"
@@ -109,8 +110,10 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
 
   // add hits
   PHG4HitContainer *g4hits = findNode::getClass<PHG4HitContainer>(topNode, m_HitNodeName);
+
   if (g4hits)
   {
+    evaltree->set_nhits(g4hits->size());
     PHG4HitContainer::ConstRange hit_range = g4hits->getHits();
     for (PHG4HitContainer::ConstIterator hit_iter = hit_range.first; hit_iter != hit_range.second; hit_iter++)
     {
@@ -124,21 +127,26 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
   RawTowerContainer *g4towers = findNode::getClass<RawTowerContainer>(topNode, m_TowerNodeName);
   if (g4towers)
   {
+    evaltree->set_ntowers(g4towers->size());
     RawTowerContainer::ConstRange tower_range = g4towers->getTowers();
     for (RawTowerContainer::ConstIterator tower_iter = tower_range.first; tower_iter != tower_range.second; tower_iter++)
     {
       RawTower *twr = tower_iter->second;
       EvalTower *evaltwr = evaltree->AddTower(twr);
       RawTowerGeom *geom = rawtowergeomcontainer->get_tower_geometry(twr->get_key());
-      evaltwr->set_eta(geom->get_eta());
-      evaltwr->set_theta(geom->get_theta());
-      evaltwr->set_phi(geom->get_phi());
+      evaltwr->set_teta(geom->get_eta());
+      evaltwr->set_ttheta(geom->get_theta());
+      evaltwr->set_tphi(geom->get_phi());
+      evaltwr->set_tx(geom->get_center_x());
+      evaltwr->set_ty(geom->get_center_y());
+      evaltwr->set_tz(geom->get_center_z());
     }
   }
   // Clusters
   RawClusterContainer *clusters = findNode::getClass<RawClusterContainer>(topNode, m_ClusterNodeName);
   if (clusters)
   {
+    evaltree->set_nclusters(clusters->size());
     for (const auto &iterator : clusters->getClustersMap())
     {
       RawCluster *cluster = iterator.second;
@@ -184,7 +192,7 @@ void EvalRootTTreeReco::Detector(const std::string &name)
   m_Detector = name;
   m_OutputNode = "EvalTTree_" + name;
   m_HitNodeName = "G4HIT_" + name;
-  m_TowerNodeName = "TOWER_SIM_" + name;
+  m_TowerNodeName = "TOWER_CALIB_" + name;
   m_TowerGeoNodeName = "TOWERGEOM_" + name;
   m_ClusterNodeName = "CLUSTER_" + name;
 }
