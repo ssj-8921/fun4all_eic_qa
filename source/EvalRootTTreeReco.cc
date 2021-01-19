@@ -111,7 +111,7 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
   // add hits
   PHG4HitContainer *g4hits = findNode::getClass<PHG4HitContainer>(topNode, m_HitNodeName);
 
-  if (g4hits)
+  if (g4hits && !m_DropHitsFlag)
   {
     evaltree->set_nhits(g4hits->size());
     PHG4HitContainer::ConstRange hit_range = g4hits->getHits();

@@ -17,6 +17,8 @@ void RunEval(const std::string &detector, const std::string &fname, const int ne
   Fun4AllServer *se = Fun4AllServer::instance();
   EvalRootTTreeReco *eval = new EvalRootTTreeReco();
   eval->Detector(detector);
+// uncomment if you want to drop storing of hits to save space
+//  eval->DropHits();
   se->registerSubsystem(eval);
   Fun4AllInputManager *in = new Fun4AllDstInputManager("QAin");
   in->fileopen(fname);
