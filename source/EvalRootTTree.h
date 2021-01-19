@@ -25,52 +25,52 @@ class EvalRootTTree : public PHObject
   EvalCluster* AddCluster(const RawCluster* clus);
 
   void set_event_number(const int i) { event = i; }
-  int get_event_number() const { return event;}
+  int get_event_number() const { return event; }
 
   void set_gpid(const int i) { gpid = i; }
-  int get_gpid() const { return gpid;}
+  int get_gpid() const { return gpid; }
 
   void set_gvx(const double v) { gvx = v; }
-  double get_gvx() const { return gvx;}
+  double get_gvx() const { return gvx; }
 
   void set_gvy(const double v) { gvy = v; }
-  double get_gvy() const { return gvy;}
+  double get_gvy() const { return gvy; }
 
   void set_gvz(const double v) { gvz = v; }
-  double get_gvz() const { return gvz;}
+  double get_gvz() const { return gvz; }
 
   void set_gpx(const double p) { gpx = p; }
-  double get_gpx() const { return gpx;}
+  double get_gpx() const { return gpx; }
 
   void set_gpy(const double p) { gpy = p; }
-  double get_gpy() const { return gpy;}
+  double get_gpy() const { return gpy; }
 
   void set_gpz(const double p) { gpz = p; }
-  double get_gpz() const { return gpz ;}
+  double get_gpz() const { return gpz; }
 
   void set_ge(const double p) { ge = p; }
-  double get_ge() const { return ge;}
+  double get_ge() const { return ge; }
 
   void set_geta(const double d) { geta = d; }
-  double get_geta() const { return geta;}
+  double get_geta() const { return geta; }
 
   void set_gphi(const double d) { gphi = d; }
-  double get_gphi() const { return gphi;}
+  double get_gphi() const { return gphi; }
 
   void set_gtheta(const double d) { gtheta = d; }
-  double get_gtheta() const { return gtheta ;}
+  double get_gtheta() const { return gtheta; }
 
-// calorimeter hits, get hit class, hit accessors are in hit class
+  // calorimeter hits, get hit class, hit accessors are in hit class
   void set_nhits(const int n) { nhits = n; }
-  int get_nhits() const {return nhits;}
-  EvalHit *get_hit(const size_t i) const;
+  int get_nhits() const { return nhits; }
+  EvalHit* get_hit(const size_t i) const;
 
   void set_ntowers(const int n) { ntowers = n; }
-  int get_ntowers() const { return ntowers;}
+  int get_ntowers() const { return ntowers; }
   EvalTower* get_tower(const size_t i) const;
 
   void set_nclusters(const int n) { nclusters = n; }
-  int get_nclusters() const { return nclusters;}
+  int get_nclusters() const { return nclusters; }
   EvalCluster* get_cluster(const size_t i) const;
 
  private:

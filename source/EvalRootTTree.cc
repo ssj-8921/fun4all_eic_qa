@@ -101,7 +101,6 @@ EvalRootTTree::get_tower(const size_t i) const
   return (EvalTower *) SnglTowers->At(i);
 }
 
-
 EvalCluster *
 EvalRootTTree::AddCluster(const RawCluster *clus)
 {
@@ -118,5 +117,5 @@ EvalRootTTree::AddCluster(const RawCluster *clus)
 EvalCluster *
 EvalRootTTree::get_cluster(const size_t i) const
 {
-return (EvalCluster *) SnglClusters->At(i);
+  return (EvalCluster *) SnglClusters->At(i);
 }
