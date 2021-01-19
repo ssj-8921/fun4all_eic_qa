@@ -10,6 +10,8 @@ class RawCluster;
 class EvalCluster : public PHObject
 {
  public:
+// ctor with no args to make root happy
+  EvalCluster() {}
   EvalCluster(const RawCluster *twr);
   virtual ~EvalCluster() {}
 

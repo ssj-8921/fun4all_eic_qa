@@ -10,18 +10,11 @@ class PHG4Hit;
 class EvalHit : public PHObject
 {
  public:
+// ctor with no args to make root happ
+  EvalHit() {}
+
   EvalHit(const PHG4Hit *g4hit);
   virtual ~EvalHit() {}
-
-  /* void set_trkid(const int i) {trackid = i;} */
-  /* void set_x(const int i, const float f) {x[i] = f;} */
-  /* void set_y(const int i, const float f) {y[i] = f;} */
-  /* void set_z(const int i, const float f) {z[i] = f;} */
-  /* void set_t(const int i, const float f) {t[i] = f;} */
-
-  /* void set_edep(const float f) {edep = f;} */
-  /* void set_eion(const float f) {eion = f;} */
-  /* void set_light_yield(const float f) {light_yield = f;} */
 
   float get_xin() const { return xin; }
 

@@ -10,6 +10,8 @@ class RawTower;
 class EvalTower : public PHObject
 {
  public:
+// ctor with no args to make root happy
+  EvalTower() {}
   EvalTower(const RawTower *twr);
   virtual ~EvalTower() {}
 
