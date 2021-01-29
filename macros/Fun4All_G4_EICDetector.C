@@ -129,7 +129,7 @@ int Fun4All_G4_EICDetector(
     }
     INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-4, 4);
     INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_p_range(0.1, 30.);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_p_range(0., 30.);
   }
   // Upsilons
   if (Input::UPSILON)
