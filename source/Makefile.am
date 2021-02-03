@@ -18,8 +18,11 @@ libeicqa_modules_la_LIBADD = \
   -lqa_modules
 
 pkginclude_HEADERS = \
+  EvalCluster.h \
+  EvalHit.h \
   EvalRootTTree.h \
   EvalRootTTreeReco.h \
+  EvalTower.h \
   QAExample.h \
   QAG4SimulationEicCalorimeter.h \
   QAG4SimulationEicCalorimeterSum.h

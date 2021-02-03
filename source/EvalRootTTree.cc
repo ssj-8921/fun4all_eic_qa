@@ -76,6 +76,12 @@ EvalRootTTree::AddHit(const PHG4Hit *g4hit)
   return (static_cast<EvalHit *>(cl[nextindex]));
 }
 
+EvalHit *
+EvalRootTTree::get_hit(const size_t i) const
+{
+  return (EvalHit *) SnglHits->At(i);
+}
+
 EvalTower *
 EvalRootTTree::AddTower(const RawTower *twr)
 {
@@ -89,6 +95,12 @@ EvalRootTTree::AddTower(const RawTower *twr)
   return (static_cast<EvalTower *>(cl[nextindex]));
 }
 
+EvalTower *
+EvalRootTTree::get_tower(const size_t i) const
+{
+  return (EvalTower *) SnglTowers->At(i);
+}
+
 EvalCluster *
 EvalRootTTree::AddCluster(const RawCluster *clus)
 {
@@ -100,4 +112,10 @@ EvalRootTTree::AddCluster(const RawCluster *clus)
   }
   new (cl[nextindex]) EvalCluster(clus);
   return (static_cast<EvalCluster *>(cl[nextindex]));
+}
+
+EvalCluster *
+EvalRootTTree::get_cluster(const size_t i) const
+{
+  return (EvalCluster *) SnglClusters->At(i);
 }
