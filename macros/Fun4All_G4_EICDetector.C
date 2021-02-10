@@ -60,7 +60,7 @@ int Fun4All_G4_EICDetector(
   // about the number of layers used for the cell reco code
   //
   //Input::READHITS = true;
-  INPUTREADHITS::filename = inputFile;
+  INPUTREADHITS::filename[0] = inputFile;
 
   // Or:
   // Use one or more particle generators
@@ -68,7 +68,7 @@ int Fun4All_G4_EICDetector(
   // all other options only play a role if it is active
   // In case embedding into a production output, please double check your G4Setup_EICDetector.C and G4_*.C consistent with those in the production macro folder
   //  Input::EMBED = true;
-  INPUTEMBED::filename = embed_input_file;
+  INPUTEMBED::filename[0] = embed_input_file;
   // Use Pythia 8
   //  Input::PYTHIA8 = true;
 
