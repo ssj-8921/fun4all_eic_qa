@@ -70,44 +70,46 @@ int EvalRootTTreeReco::process_event(PHCompositeNode *topNode)
 
   EvalRootTTree *evaltree = findNode::getClass<EvalRootTTree>(topNode, m_OutputNode);
   PHG4VtxPoint *gvertex = truthinfo->GetPrimaryVtx(truthinfo->GetPrimaryVertexIndex());
-  evaltree->set_gvx(gvertex->get_x());
-  evaltree->set_gvy(gvertex->get_y());
-  evaltree->set_gvz(gvertex->get_z());
-  PHG4TruthInfoContainer::ConstRange range = truthinfo->GetPrimaryParticleRange();
-  int justone = 0;
-  for (PHG4TruthInfoContainer::ConstIterator iter = range.first;
-       iter != range.second;
-       ++iter)
+  if (gvertex)
   {
-    justone++;
-    PHG4Particle *primary = iter->second;
-    double gpx = primary->get_px();
-    double gpy = primary->get_py();
-    double gpz = primary->get_pz();
-    double gpt = std::sqrt(gpx * gpx + gpy * gpy);
-    double gmom = std::sqrt(gpx * gpx + gpy * gpy + gpz * gpz);
-
-    evaltree->set_gpx(gpx);
-    evaltree->set_gpy(gpy);
-    evaltree->set_gpz(gpz);
-    evaltree->set_ge(primary->get_e());
-    evaltree->set_gpid(primary->get_pid());
-    double geta = NAN;
-    if (gpt > 0)
+    evaltree->set_gvx(gvertex->get_x());
+    evaltree->set_gvy(gvertex->get_y());
+    evaltree->set_gvz(gvertex->get_z());
+    PHG4TruthInfoContainer::ConstRange range = truthinfo->GetPrimaryParticleRange();
+    int justone = 0;
+    for (PHG4TruthInfoContainer::ConstIterator iter = range.first;
+	 iter != range.second;
+	 ++iter)
     {
-      geta = asinh(gpz / gpt);
-    }
-    evaltree->set_geta(geta);
-    evaltree->set_gphi(atan2(gpy, gpx));
-    evaltree->set_gtheta(acos(gpz / gmom));
-  }
-  if (justone > 1)
-  {
-    std::cout << "this only works for single particle events"
-              << " here I see " << justone << " primaries" << std::endl;
-    gSystem->Exit(1);
-  }
+      justone++;
+      PHG4Particle *primary = iter->second;
+      double gpx = primary->get_px();
+      double gpy = primary->get_py();
+      double gpz = primary->get_pz();
+      double gpt = std::sqrt(gpx * gpx + gpy * gpy);
+      double gmom = std::sqrt(gpx * gpx + gpy * gpy + gpz * gpz);
 
+      evaltree->set_gpx(gpx);
+      evaltree->set_gpy(gpy);
+      evaltree->set_gpz(gpz);
+      evaltree->set_ge(primary->get_e());
+      evaltree->set_gpid(primary->get_pid());
+      double geta = NAN;
+      if (gpt > 0)
+      {
+	geta = asinh(gpz / gpt);
+      }
+      evaltree->set_geta(geta);
+      evaltree->set_gphi(atan2(gpy, gpx));
+      evaltree->set_gtheta(acos(gpz / gmom));
+    }
+    if (justone > 1)
+    {
+      std::cout << "this only works for single particle events"
+		<< " here I see " << justone << " primaries" << std::endl;
+      gSystem->Exit(1);
+    }
+  }
   // add hits
   PHG4HitContainer *g4hits = findNode::getClass<PHG4HitContainer>(topNode, m_HitNodeName);
 
