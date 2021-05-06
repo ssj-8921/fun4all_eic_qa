@@ -51,7 +51,11 @@ class EvalRootTTreeReco : public SubsysReco
 
   void Detector(const std::string &name);
 
+  void DropHits(const bool drp = true) { m_DropHitsFlag = drp; }
+
  private:
+  bool m_DropHitsFlag = false;
+
   std::string m_Detector;
 
   std::string m_OutputNode;

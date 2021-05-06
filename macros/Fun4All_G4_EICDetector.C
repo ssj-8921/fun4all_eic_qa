@@ -60,7 +60,7 @@ int Fun4All_G4_EICDetector(
   // about the number of layers used for the cell reco code
   //
   //Input::READHITS = true;
-  INPUTREADHITS::filename = inputFile;
+  INPUTREADHITS::filename[0] = inputFile;
 
   // Or:
   // Use one or more particle generators
@@ -68,7 +68,7 @@ int Fun4All_G4_EICDetector(
   // all other options only play a role if it is active
   // In case embedding into a production output, please double check your G4Setup_EICDetector.C and G4_*.C consistent with those in the production macro folder
   //  Input::EMBED = true;
-  INPUTEMBED::filename = embed_input_file;
+  INPUTEMBED::filename[0] = embed_input_file;
   // Use Pythia 8
   //  Input::PYTHIA8 = true;
 
@@ -127,9 +127,9 @@ int Fun4All_G4_EICDetector(
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., 0.);
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 0.);
     }
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(1.5, 4);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-4, 4);
     INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_pt_range(4., 4.);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_p_range(0., 30.);
   }
   // Upsilons
   if (Input::UPSILON)
@@ -226,6 +226,7 @@ int Fun4All_G4_EICDetector(
   Enable::CEMC_TOWER = Enable::CEMC_CELL && true;
   Enable::CEMC_CLUSTER = Enable::CEMC_TOWER && true;
 //  Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && true;
+  G4CEMC::TowerDigi = RawTowerDigitizer::kNo_digitization;
 
   Enable::HCALIN = true;
   //  Enable::HCALIN_ABSORBER = true;
@@ -233,6 +234,7 @@ int Fun4All_G4_EICDetector(
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
 //  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
+  G4HCALIN::TowerDigi = RawTowerDigitizer::kNo_digitization;
 
   Enable::MAGNET = true;
 
@@ -242,6 +244,7 @@ int Fun4All_G4_EICDetector(
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
   Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
 //  Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
+  G4HCALOUT::TowerDigi = RawTowerDigitizer::kNo_digitization;
 
   // EICDetector geometry - barrel
   Enable::DIRC = true;
@@ -267,6 +270,7 @@ int Fun4All_G4_EICDetector(
   Enable::EEMC_TOWER = Enable::EEMC && true;
   Enable::EEMC_CLUSTER = Enable::EEMC_TOWER && true;
 //  Enable::EEMC_EVAL = Enable::EEMC_CLUSTER && true;
+  G4EEMC::TowerDigi = RawTowerDigitizer::kNo_digitization;
 
   //  Enable::PLUGDOOR = true;
 
