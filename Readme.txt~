@@ -129,7 +129,3 @@ Note: The names are not particle-specific, hence the macros must be run in separ
 
 
 Note: Circular cuts used are actually elliptical in shape. 'Circular' is used here as an umbrella term for all kinds of ellipses.
-
-
-Note: Since the "Requirement" curves in the sigma_e vs ge plot generated from the LoopEvalMultiPortableChi2.C and 
-LoopEvalPortableCircularCut.C macros are made by keeping electrons in mind, only this part of the macros is particle specific.

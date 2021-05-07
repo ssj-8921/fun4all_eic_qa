@@ -1,7 +1,21 @@
-// Energy plots including [sigma_e vs ge] plots; Eta Cuts; Combined FEMC+FHCAL; 
-//Standalone; Plots made -  [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], 
-//[counts for ce], [counts for ge], [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], 
-//slices for the [(ce-ge)/ge vs ge] plot.
+/*
+- Energy plots including [sigma_e vs ge] plots
+- Eta Cuts
+- Combined FEMC+FHCAL
+- Standalone
+- Output root file - energy_verification_EtaCut_FHCAL_FEMC.root
+- Plots made -  [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], [counts for ce], 
+  [counts for ge], [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(ce-ge)/ge vs ge] plot.
+*/
+
+/*
+  authors - Sagar Joshi      (ee190002054@iiti.ac.in)
+            Siddhant Rathi   (me190003061@iiti.ac.in)
+	    
+  version - 1.0
+
+*/
+
 
 #include <iostream>
 #include <eicqa_modules/EvalRootTTree.h>

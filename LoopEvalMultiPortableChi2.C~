@@ -50,91 +50,68 @@ void LoopEvalMultiPortableChi2(TString detector, int print = 1, int debug = 0){
   TH2D *ce_minus_ge_by_ge_ge_EtaCut = new TH2D("ce_minus_ge_by_ge_ge_EtaCut","#frac{#Delta e_{agg}}{truth e} vs truth e",nSlices,0,30,2000,-2,1);
   
   Double_t eta_min, eta_max;
-  TString cut_text, eRes, pRes;
+  TString cut_text;
 
   // Applying detector-specific eta cuts
 
   if (detector == "FEMC"){
-    x_radius = 0.15; //radius of circular cut
-    y_radius = 0.4;
     eta_min = 1.3;
     eta_max = 3.3;
     cut_text = " {1.3 < true_eta < 3.3} ";
-    eRes = "0.02 + 0.08/sqrt(x) + 0.02/x";
-    pRes = "(e-)";
 
     if(debug==1){
-      std::cout<<"FEMC eta cut & circular cut applied"<<"\n\n";
+      std::cout<<"FEMC eta cut"<<"\n\n";
     }
+    
   }
-
+  
   else if(detector == "EEMC"){
-    x_radius = 0.15; //radius of circular cut
-    y_radius = 0.4;    
     eta_min = -3.5;
     eta_max = -1.7;
     cut_text = " {-3.5 < true_eta < -1.7} ";
-    eRes = "0.01 + 0.025/sqrt(x) + 0.01/x";
-    pRes = "(e-)";
-
-    if(debug==1){
-      std::cout<<"EEMC eta cut & circular cut applied"<<"\n\n";
+    
+    if(debug==1){    
+      std::cout<<"EEMC eta cut"<<"\n\n";
     }
   }
 
   else if(detector == "CEMC"){
-    x_radius = 0.15; //radius of circular cut
-    y_radius = 0.4;
     eta_min = -1.5;
     eta_max = 1.2;
     cut_text = " {-1.5 < true_eta < 1.2} ";
-    eRes = "0.025 + 0.13/sqrt(x) + 0.02/x";
-    pRes = "(e-)";
-
+    
     if(debug==1){
-      std::cout<<"CEMC eta cut & circular cut applied"<<"\n\n";
+      std::cout<<"CEMC eta cut"<<"\n\n";
     }
   }
 
   else if(detector == "FHCAL"){
-    x_radius = 0.2; //radius of circular cut
-    y_radius = 0.5;
     eta_min = 1.2;
     eta_max = 3.5;
     cut_text = " {1.2 < true_eta < 3.5} ";
-    eRes = "1";
-    pRes = "(e-)";
-
-    if(debug==1){
-      std::cout<<"FHCAL eta cut & circular cut applied"<<"\n\n";
+    
+    if(debug==1){    
+      std::cout<<"FHCAL eta cut"<<"\n\n";
     }
   }
 
   else if(detector == "HCALIN"){
-    x_radius = 0.15; //radius of circular cut
-    y_radius = 0.4;
     eta_min = -1.1;
     eta_max = 1.1;
     cut_text = " {-1.1 < true_eta < 1.1} ";
-    eRes = "1";
-    pRes = "(e-)";
-
+  
     if(debug==1){
-      std::cout<<"HCALIN eta cut & circular cut applied"<<"\n\n";
+      std::cout<<"HCALIN eta cut"<<"\n\n";
     }
   }
-
+  
   else if(detector == "HCALOUT"){
-    x_radius = 0.15; //radius of circular cut
-    y_radius = 0.4;
     eta_min = -1.1;
     eta_max = 1.1;
     cut_text = " {-1.1 < true_eta < 1.1} ";
-    eRes = "1";
-    pRes = "(e-)";
-      
+   
     if(debug==1){
-      std::cout<<"HCALOUT eta cut & circular cut applied"<<"\n\n";
+      std::cout<<"HCALOUT eta cut"<<"\n\n";
     }
   }
 
@@ -142,6 +119,8 @@ void LoopEvalMultiPortableChi2(TString detector, int print = 1, int debug = 0){
     std::cout<<"Please try again.";
     return 1;
   }
+  
+
 
   for(int i=0; i<T1->GetEntries(); i++){
     T1->GetEntry(i);
@@ -266,7 +245,7 @@ void LoopEvalMultiPortableChi2(TString detector, int print = 1, int debug = 0){
   }
 
   TF1 *fit = new TF1("fit", "gaus");   
-  TF1 *fExp = new TF1("fExp",eRes,0,30);
+  TF1 *fExp = new TF1("fExp","0.02 + 0.08/sqrt(x) + 0.02/x",0,30);
   TF1 *fTrue = new TF1("fTrue","[0] + [1]/sqrt(x) + [2]/x",0,30);  
  
   if(debug==1){
@@ -357,13 +336,13 @@ void LoopEvalMultiPortableChi2(TString detector, int print = 1, int debug = 0){
     legend->AddEntry((TObject*)0,"","");
     legend->AddEntry(fTrue, "p_{0} + p_{1}/#sqrt{ge} + p_{2}/ge (Fitted)", "l");
     legend->AddEntry((TObject*)0,"","");
-    legend->AddEntry(fExp, eRes + pRes, "l");
+    legend->AddEntry(fExp, "0.02 + 0.08/#sqrt{ge} +0.02/ge", "l");
     legend->AddEntry((TObject*)0,"(Requirement)","");
     legend->SetTextSize(0.033);
     legend->Draw();
 
-    cout<<"reduced_chi2 of fit: "<<fTrue->GetChisquare()<<"\n";
-    cout<<"parameters: "<<fTrue->GetParameters()<<"\n";
+    //cout<<"reduced_chi2 of fit: "<<fTrue->GetChisquare()<<"\n";
+    //cout<<"parameters: "<<fTrue->GetParameters()<<"\n";
 
     c->Print(detector + "sigmaE_ge_EtaCut.png");
 

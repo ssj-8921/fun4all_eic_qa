@@ -1,11 +1,21 @@
-//> LoopEvalMultiHCircularCut.C 
-//- Tower energy plots with manual clustering
-//- Eta and Circular Cuts
-//- Combined CEMC+HCALIN+HCALOUT
-//- Standalone
-//- Output file - energy_verification_EtaCut_CircularCut_FHCAL_FEMC.root
-//- Plots made - [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the
-//  [(te-ge)/ge vs ge], [te/ge vs ge], [(te-ge)/ge vs ge], both with and without circular cuts.
+/*
+- Tower energy plots with manual clustering
+- Eta and Circular Cuts
+- Combined CEMC+HCALIN+HCALOUT
+- Standalone
+- Output file - energy_verification_EtaCut_CircularCut_FHCAL_FEMC.root
+- Plots made - [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(te-ge)/ge vs ge], 
+  [te/ge vs ge], [(te-ge)/ge vs ge], both with and without circular cuts.
+*/
+
+/*
+  authors - Sagar Joshi      (ee190002054@iiti.ac.in)
+            Siddhant Rathi   (me190003061@iiti.ac.in)
+	    
+  version - 1.0
+
+*/
+
 
 #include <iostream>
 #include <eicqa_modules/EvalRootTTree.h>

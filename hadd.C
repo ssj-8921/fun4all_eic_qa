@@ -1,3 +1,5 @@
+//- Used to combine the evaluator files while running jobs in batches
+
 #include <string.h>
 #include "TChain.h"
 #include "TFile.h"

@@ -1,4 +1,21 @@
-// Energy plots; Eta cuts; Individual detectors; Standalone; Plots made - [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], [counts for ce], [counts for ge].
+/*
+- Energy plots
+- Eta cuts
+- Individual detector
+- Standalone
+- Output file - energy_verification_EtaCut_detector.root
+- Plots made - [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], 
+  [counts for ce], [counts for ge]. (debug not implemented)
+*/
+
+/*
+  authors - Sagar Joshi      (ee190002054@iiti.ac.in)
+            Siddhant Rathi   (me190003061@iiti.ac.in)
+	    
+  version - 1.0
+
+*/
+
 
 #include <iostream>
 #include <eicqa_modules/EvalRootTTree.h>
@@ -215,21 +232,24 @@ void EnergyEvalEtaCut(TString detector, int print = 1, int debug = 0)
   f->GetList()->Add(counts_ge_EtaCut);     
   f->Write();
 
+  if(print == 1){
 
-  ce_minus_ge_by_ge_ge_EtaCut->Draw("colz");
-  c->Print(detector + "ce_minus_ge_by_ge_ge_EtaCut.png");
-  ce_by_ge_ge_EtaCut->Draw("colz");
-  c->Print(detector + "ce_by_ge_ge_EtaCut.png");
-  te_by_ge_ge_EtaCut->Draw("colz");
-  c->Print(detector + "te_by_ge_ge_EtaCut.png");
-  ce_minus_te_ge_EtaCut->Draw("colz");
-  c->Print(detector + "ce_minus_te_ge_EtaCut.png");
-  counts_te_EtaCut->Draw("colz");
-  c->Print(detector + "counts_te_EtaCut.png");
-  counts_ce_EtaCut->Draw("colz");
-  c->Print(detector + "counts_ce_EtaCut.png");
-  counts_ge_EtaCut->Draw("colz");
-  c->Print(detector + "counts_ge_EtaCut.png");
+    ce_minus_ge_by_ge_ge_EtaCut->Draw("colz");
+    c->Print(detector + "ce_minus_ge_by_ge_ge_EtaCut.png");
+    ce_by_ge_ge_EtaCut->Draw("colz");
+    c->Print(detector + "ce_by_ge_ge_EtaCut.png");
+    te_by_ge_ge_EtaCut->Draw("colz");
+    c->Print(detector + "te_by_ge_ge_EtaCut.png");
+    ce_minus_te_ge_EtaCut->Draw("colz");
+    c->Print(detector + "ce_minus_te_ge_EtaCut.png");
+    counts_te_EtaCut->Draw("colz");
+    c->Print(detector + "counts_te_EtaCut.png");
+    counts_ce_EtaCut->Draw("colz");
+    c->Print(detector + "counts_ce_EtaCut.png");
+    counts_ge_EtaCut->Draw("colz");
+    c->Print(detector + "counts_ge_EtaCut.png");
+
+  }
 
   std::cout << "The total ce is: " << total_ce << endl;
   std::cout << "The total te is: " << total_te << endl;

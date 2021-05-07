@@ -1,4 +1,19 @@
-// Reference macro; Generates Truth-values for reference while debugging LoopEvalMultiH.C
+/*
+- Reference statistics to debug LoopEvalMultiH*.C
+- Combined CEMC+HCALIN+HCALOUT
+- Standalone
+- Output file - None (LoopEvalMultiHVerify.txt when ran using script)
+- Plots made - None
+*/
+
+/*
+  authors - Sagar Joshi      (ee190002054@iiti.ac.in)
+            Siddhant Rathi   (me190003061@iiti.ac.in)
+	    
+  version - 1.0
+
+*/
+
 
 #include <iostream>
 #include <eicqa_modules/EvalRootTTree.h>
