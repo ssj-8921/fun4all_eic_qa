@@ -1,0 +1,131 @@
+The description for individual macros is as follows:
+
+
+> LoopEvalMultiPortableChi2.C(TString detector, int print = 1, debug = 0) 
+- [sigma_e vs ge] plots 
+- Eta Cuts 
+- Individual detectors 
+- Standalone 
+- Output root file - sigma_e_EtaCut_detector.root
+- Plots made - [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(ce-ge)/ge vs ge] plot.
+
+
+> EnergyEvalEtaCut.C(TString detector, int print = 1, debug = 0) 
+- Energy plots
+- Eta cuts
+- Individual detector
+- Standalone
+- Output file - energy_verification_EtaCut_detector.root
+- Plots made - [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], 
+  [counts for ce], [counts for ge]. (debug not implemented)
+
+
+> LoopEvalPortableCircularCut.C(TString detector, int print = 1, debug = 0) 
+- Tower energy plots with manual clustering
+- Eta and Circular Cuts
+- Individual detectors
+- Standalone
+- Output file - energy_verification_EtaCut_CircularCut_detector.root
+- Plots made - [counts for twr_count], [te/ge vs ge], [tphi vs gphi], [theta vs gtheta], [dphi vs dtheta], 
+  [(te-ge)/ge vs ge], [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(te-ge)/ge vs ge] 
+  plot, both with and without circular cuts.
+
+
+> LoopEvalMultiF.C(int print = 1, debug = 0) 
+- Energy plots including [sigma_e vs ge] plots
+- Eta Cuts
+- Combined FEMC+FHCAL
+- Standalone
+- Output root file - energy_verification_EtaCut_FHCAL_FEMC.root
+- Plots made -  [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], [counts for ce], 
+  [counts for ge], [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(ce-ge)/ge vs ge] plot.
+
+
+> LoopEvalMultiFCircularCut.C(int print = 1, debug = 0) 
+- Tower energy plots with manual clustering
+- Eta and Circular Cuts
+- Combined FEMC+FHCAL
+- Standalone
+- Output file - energy_verification_EtaCut_CircularCut_FHCAL_FEMC.root
+- Plots made - [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(te-ge)/ge vs ge], [te/ge vs ge], 
+  [(te-ge)/ge vs ge], both with and without circular cuts.
+
+
+> LoopEvalMultiFVerify.C(int print = 1, debug = 0)
+- Reference statistics to debug LoopEvalMultiF*.C
+- Combined FEMC+FHCAL
+- Standalone
+- Output file - None (LoopEvalMultiFVerify.txt when ran using script)
+- Plots made - None
+
+
+> LoopEvalMultiH.C(int print = 1, debug = 0)
+- Energy plots including [sigma_e vs ge] plots
+- Eta Cuts
+- Combined CEMC+HCALIN+HCALOUT
+- Standalone
+- Output root file - energy_verification_EtaCut_HCALIN_HCALOUT_CEMC.root
+- Plots made -  [te/ge vs ge], [ce/ge vs ge], [ce-te vs ge], [(ce-ge)/ge vs ge], [counts for te], 
+  [counts for ce], [counts for ge], [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for 
+  the [(ce-ge)/ge vs ge] plot.
+
+
+> LoopEvalMultiHCircularCut.C(int print = 1, debug = 0)
+- Tower energy plots with manual clustering
+- Eta and Circular Cuts
+- Combined CEMC+HCALIN+HCALOUT
+- Standalone
+- Output file - energy_verification_EtaCut_CircularCut_FHCAL_FEMC.root
+- Plots made - [sigma_e vs ge], [mean_e vs ge], [chi2_e vs ge], slices for the [(te-ge)/ge vs ge], 
+  [te/ge vs ge], [(te-ge)/ge vs ge], both with and without circular cuts.
+
+
+> LoopEvalMultiHVerify.C(int print = 1, debug = 0)
+- Reference statistics to debug LoopEvalMultiH*.C
+- Combined CEMC+HCALIN+HCALOUT
+- Standalone
+- Output file - None (LoopEvalMultiHVerify.txt when ran using script)
+- Plots made - None
+
+
+> Interface.C()
+- Provides an interface to use all macros listed above
+- Detector-selection by user
+- Depends on all the macros listed above 
+- Output file - Dependent on the options chosen
+- Plots made - Dependent on the options chosen
+
+
+> hadd.C()
+- Used to combine the evaluator files while running jobs in batches
+
+
+---------------------------------------------------------------------------------------------------
+
+
+The input variable description is as follows:
+> detector - Specify detector in non-detector-specific macros
+> print - if 1 (default), creates .png files for all plots, else .png files are not created
+> debug - if 1, prints verbose messages to help in debugging (default 0)
+
+
+----------------------------------------------------------------------------------------------------
+
+
+Each macro has a correspnding .csh file  with the same/ a similar name that generates a text file containing
+the terminal output. It is recommended to use this .csh file while debugging as it makes the process faster 
+and more convenient.
+
+
+----------------------------------------------------------------------------------------------------
+
+
+The naming convention for .png files generated is as follows: detectorName_yVariable_xVariable_cutsApplied.png
+The naming of variables also uses operator-words such as 'minus' and 'by'. 
+e.g. [(ce-ge)/ge vs ge] with eta cuts applied is saved as ce_minus_ge_by_ge_ge_EtaCut.png 
+
+
+Note: The names are not particle-specific, hence the macros must be run in separate folders for different particles
+
+
+Note: Circular cuts used are actually elliptical in shape. 'Circular' is used here as an umbrella term for all kinds of ellipses.
