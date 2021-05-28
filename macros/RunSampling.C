@@ -17,6 +17,7 @@ void RunSampling(const std::string &detector, const std::string &fname, const in
   
   SamplingFractionReco *sf = new SamplingFractionReco("SF",outfile);
   sf->Detector(detector);
+  sf->add_support_eloss();
   se->registerSubsystem(sf);
   Fun4AllInputManager *in = new Fun4AllDstInputManager("QAin");
   in->fileopen(fname);

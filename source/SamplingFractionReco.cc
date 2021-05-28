@@ -1,7 +1,6 @@
 
 #include "SamplingFractionReco.h"
 
-
 #include <g4main/PHG4Hit.h>
 #include <g4main/PHG4HitContainer.h>
 #include <g4main/PHG4Particle.h>
@@ -66,26 +65,26 @@ int SamplingFractionReco::process_event(PHCompositeNode *topNode)
     int justone = 0;
 
     for (PHG4TruthInfoContainer::ConstIterator iter = range.first;
-	 iter != range.second;
-	 ++iter)
+         iter != range.second;
+         ++iter)
     {
       justone++;
       PHG4Particle *primary = iter->second;
       double gpx = primary->get_px();
       double gpy = primary->get_py();
-      phi = atan2(gpy, gpx)*180./M_PI;
+      phi = atan2(gpy, gpx) * 180. / M_PI;
       double gpz = primary->get_pz();
       double gpt = std::sqrt(gpx * gpx + gpy * gpy);
       mom = std::sqrt(gpx * gpx + gpy * gpy + gpz * gpz);
       if (gpt > 0)
       {
-	eta = asinh(gpz / gpt);
+        eta = asinh(gpz / gpt);
       }
     }
     if (justone > 1)
     {
       std::cout << "this only works for single particle events"
-		<< " here I see " << justone << " primaries" << std::endl;
+                << " here I see " << justone << " primaries" << std::endl;
       gSystem->Exit(1);
     }
   }
@@ -124,8 +123,24 @@ int SamplingFractionReco::process_event(PHCompositeNode *topNode)
   {
     std::cout << "could not find " << m_AbsorberNodeName << std::endl;
   }
+  if (m_SupportFlag)
+  {
+    g4hits = findNode::getClass<PHG4HitContainer>(topNode, m_SupportNodeName);
+    if (g4hits)
+    {
+      PHG4HitContainer::ConstRange hit_range = g4hits->getHits();
+      for (PHG4HitContainer::ConstIterator hit_iter = hit_range.first; hit_iter != hit_range.second; hit_iter++)
+      {
+        eabs += hit_iter->second->get_edep();
+      }
+    }
+    else
+    {
+      std::cout << "could not find " << m_SupportNodeName << std::endl;
+    }
+  }
   esum = escin + eabs;
-  ntup->Fill(theta,phi,eta,mom,escin,eabs,eion,light,esum);
+  ntup->Fill(theta, phi, eta, mom, escin, eabs, eion, light, esum);
   return Fun4AllReturnCodes::EVENT_OK;
 }
 
@@ -169,4 +184,5 @@ void SamplingFractionReco::Detector(const std::string &name)
   m_Detector = name;
   m_HitNodeName = "G4HIT_" + name;
   m_AbsorberNodeName = "G4HIT_ABSORBER_" + name;
+  m_SupportNodeName = "G4HIT_SUPPORT_" + name;
 }
