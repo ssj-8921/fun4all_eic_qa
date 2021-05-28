@@ -14,7 +14,7 @@ class TNtuple;
 class SamplingFractionReco : public SubsysReco
 {
  public:
-  SamplingFractionReco(const std::string &name = "SamplingFractionReco", const std::string &filename ="output.root");
+  SamplingFractionReco(const std::string &name = "SamplingFractionReco", const std::string &filename = "output.root");
 
   virtual ~SamplingFractionReco();
 
@@ -53,15 +53,20 @@ class SamplingFractionReco : public SubsysReco
 
   void Detector(const std::string &name);
 
+  void add_support_eloss(const int i = 1) { m_SupportFlag = i; }
+
  private:
   TNtuple *ntup = nullptr;
   TFile *outfile = nullptr;
+
+  int m_SupportFlag = 0;
 
   std::string outfilename;
   std::string m_Detector;
 
   std::string m_HitNodeName;
   std::string m_AbsorberNodeName;
+  std::string m_SupportNodeName;
 };
 
 #endif  // SAMPLINGFRACTIONRECO_H
